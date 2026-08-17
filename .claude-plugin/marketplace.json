@@ -1,5 +1,5 @@
 {
-  "name": "code-rigor-marketplace",
+  "name": "skills-marketplace",
   "owner": {
     "name": "Jeff Lotthammer",
     "email": "j.lotthammer@wustl.edu"
@@ -10,6 +10,15 @@
       "source": "./code-rigor",
       "description": "Software engineering discipline for maintainable architecture, dataflow, ownership, testing, and optimization.",
       "version": "1.0.0"
+    },
+    {
+      "name": "labcoat",
+      "source": {
+        "source": "github",
+        "repo": "jlotthammer/labcoat"
+      },
+      "description": "Local-first experimental provenance workspace: turns structured experiment notes into a live reasoning graph of hypotheses, evidence, code changes, and lineage.",
+      "version": "0.8.0"
     }
   ]
 }
