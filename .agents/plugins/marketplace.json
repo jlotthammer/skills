@@ -1,0 +1,32 @@
+{
+  "name": "skills-marketplace",
+  "interface": {
+    "displayName": "Agent Skills Marketplace"
+  },
+  "plugins": [
+    {
+      "name": "code-rigor",
+      "source": {
+        "source": "local",
+        "path": "./code-rigor"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "labcoat",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/jlotthammer/labcoat"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer Tools"
+    }
+  ]
+}

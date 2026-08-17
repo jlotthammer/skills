@@ -6,9 +6,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This repo is both a monorepo of Claude Code / Codex **skill plugins** and a **Claude Code plugin marketplace** (`.claude-plugin/marketplace.json` at the root). Each top-level directory (e.g. `code-rigor/`) is an independent, self-contained plugin with its own manifest, skills, and tests. There is no shared build system or package manager tying plugins together — each plugin stands alone and can be installed independently via `/plugin install <name>@skills-marketplace`.
 
-## Marketplace catalog
+## Marketplace catalogs
 
-`.claude-plugin/marketplace.json` lists every installable plugin: `name` (required), `owner` (required object), and a `plugins` array where each entry has `name` and `source` (a `./relative-path` to that plugin's directory). When adding a new plugin directory, add a matching entry here or `/plugin install` won't find it. This file is separate from and additional to each plugin's own `.claude-plugin/plugin.json`.
+Two independent marketplace catalog files, one per agent ecosystem — they use different paths and schemas and must be kept in sync manually when a plugin is added:
+
+- `.claude-plugin/marketplace.json` (Claude Code) — `name` (required), `owner` (required object), `plugins` array where each entry has `name` and `source` (a `./relative-path`, or an object like `{ "source": "github", "repo": "owner/repo" }` for a plugin that lives in its own repo). Installed via `/plugin marketplace add` + `/plugin install`.
+- `.agents/plugins/marketplace.json` (Codex) — `name`, optional `interface.displayName`, `plugins` array where each entry has `name`, `source`, a `policy: { "installation": ..., "authentication": ... }` block, and `category`. Installed via `codex plugin marketplace add` + `codex plugin add`. Source variants (from `RawMarketplaceManifestPluginSourceObject` in `codex-rs/core-plugins/src/marketplace.rs`): `local` (`path`), `url` (`url`, optional `path`/`ref`/`sha`), `git-subdir` (`url` + `path`, optional `ref`/`sha`), `npm` (`package`, optional `version`/`registry`). Note: the `plugin-creator` scaffold's reference doc says to "use `local` for this repo workflow" — that's scaffold guidance, **not** a schema limit; remote sources work fine.
+
+Both files are separate from and additional to each plugin's own `.claude-plugin/plugin.json` / `.codex-plugin/plugin.json`. When adding a new plugin, add a matching entry to both catalogs or the respective `install` command won't find it. For a remote-sourced plugin, Codex expects that repo's manifest at `.codex-plugin/plugin.json` (its `fallback_plugin_manifest_path`), so an external plugin needs both manifests at its own root to be installable from both ecosystems.
 
 ## Plugin anatomy
 
