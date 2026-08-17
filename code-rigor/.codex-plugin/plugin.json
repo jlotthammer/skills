@@ -1,0 +1,31 @@
+{
+  "name": "code-rigor",
+  "version": "1.0.0",
+  "description": "Software engineering discipline for maintainable architecture, dataflow, ownership, testing, and optimization.",
+  "author": {
+    "name": "Local"
+  },
+  "license": "MIT",
+  "keywords": [
+    "software-engineering",
+    "architecture",
+    "maintainability",
+    "code-review",
+    "optimization"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Code Rigor",
+    "shortDescription": "Architecture and maintainability discipline",
+    "longDescription": "Guide implementation and review toward repository-grounded interfaces, direct dataflow, explicit ownership, durable tests, and justified complexity.",
+    "developerName": "Local",
+    "category": "Productivity",
+    "capabilities": [
+      "Instructions"
+    ],
+    "defaultPrompt": [
+      "Use Code Rigor for this implementation.",
+      "Review this diff with Code Rigor."
+    ]
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "name": "code-rigor-marketplace",
+  "owner": {
+    "name": "Jeff Lotthammer",
+    "email": "j.lotthammer@wustl.edu"
+  },
+  "plugins": [
+    {
+      "name": "code-rigor",
+      "source": "./code-rigor",
+      "description": "Software engineering discipline for maintainable architecture, dataflow, ownership, testing, and optimization.",
+      "version": "1.0.0"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "name": "code-rigor",
+  "version": "1.0.0",
+  "description": "Software engineering discipline for maintainable architecture, dataflow, ownership, testing, and optimization.",
+  "author": {
+    "name": "Local"
+  },
+  "license": "MIT",
+  "keywords": [
+    "software-engineering",
+    "architecture",
+    "maintainability",
+    "code-review",
+    "optimization"
+  ],
+  "skills": "./skills/"
+}
