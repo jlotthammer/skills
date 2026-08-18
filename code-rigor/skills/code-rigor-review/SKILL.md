@@ -36,6 +36,8 @@ Compare the reconstructed obligations with the diff:
 
 Report only specific, evidenced, actionable findings. For each, identify the violated obligation/invariant, repository evidence, changed path, and smallest owner-level correction.
 
+**REQUIRED REFERENCE:** Before reporting any finding, read `../code-rigor/references/evidence.md`. Name the line you read that makes the finding true, and state what would refute it. Most obligations above are exhaustiveness claims — one traced path does not establish "only". If the mechanism is unconfirmed, report a question rather than a defect.
+
 End with **goal fidelity: satisfied / partially satisfied / not established**.
 
 ## Boundaries
@@ -44,6 +46,7 @@ Broad correctness, security, and ordinary regression review belong to the host's
 
 For deeper analysis, load the relevant sibling `code-rigor` reference:
 
+- evidence → `../code-rigor/references/evidence.md`
 - interfaces → `../code-rigor/references/interfaces.md`
 - dataflow/persistence → `../code-rigor/references/dataflow.md`
 - state/lifetime → `../code-rigor/references/state-and-lifetime.md`

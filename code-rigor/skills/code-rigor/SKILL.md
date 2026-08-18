@@ -13,7 +13,7 @@ Repository evidence outranks generic design instinct. Preserve or expand behavio
 
 ## Core invariants
 
-1. **Repository grounding** — find the existing owner, callers, contracts, and local conventions before introducing architecture.
+1. **Repository grounding** — find the existing owner, callers, contracts, and local conventions before introducing architecture. Search locates candidates; reading the implementing line establishes behavior. See `references/evidence.md`.
 2. **Canonical interface and source of truth** — one concept should normally have one owner, one normal path, and one authoritative state.
 3. **Ownership and lifetime** — mutable state, resources, and derived information belong at the scope where their validity is clear.
 4. **Canonical dataflow** — normalize at real boundaries, keep representations aligned with consumers, and avoid unnecessary conversion, copying, materialization, serialization, or synchronization.
@@ -55,6 +55,7 @@ For a substantial coherent diff, invoke sibling `code-rigor-review` before repor
 
 Load only references relevant to the change:
 
+- `references/evidence.md` — establishing behavior before claiming it: reading the callee, enumerating for exhaustiveness claims, and refutation.
 - `references/interfaces.md` — API boundaries, ownership, genericity, compatibility, and abstraction quality.
 - `references/dataflow.md` — representation flow, canonicalization, materialization, storage/I/O boundaries, and repeated work.
 - `references/state-and-lifetime.md` — mutable/derived state, caches, resources, aliases, iterators, and invalidation.
