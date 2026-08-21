@@ -18,7 +18,7 @@
         "repo": "jlotthammer/labcoat"
       },
       "description": "Local-first experimental provenance workspace: turns structured experiment notes into a live reasoning graph of hypotheses, evidence, code changes, and lineage.",
-      "version": "0.8.2"
+      "version": "0.8.3"
     }
   ]
 }
