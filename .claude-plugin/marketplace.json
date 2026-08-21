@@ -15,7 +15,8 @@
       "name": "labcoat",
       "source": {
         "source": "github",
-        "repo": "jlotthammer/labcoat"
+        "repo": "jlotthammer/labcoat",
+        "ref": "labcoat--v0.8.3"
       },
       "description": "Local-first experimental provenance workspace: turns structured experiment notes into a live reasoning graph of hypotheses, evidence, code changes, and lineage.",
       "version": "0.8.3"
