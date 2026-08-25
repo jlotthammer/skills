@@ -1,5 +1,6 @@
 {
   "name": "skills-marketplace",
+  "description": "Engineering discipline and experimental provenance plugins for Claude Code.",
   "owner": {
     "name": "Jeff Lotthammer",
     "email": "j.lotthammer@wustl.edu"
@@ -16,10 +17,10 @@
       "source": {
         "source": "github",
         "repo": "jlotthammer/labcoat",
-        "ref": "labcoat--v0.8.6"
+        "ref": "labcoat--v0.8.7"
       },
       "description": "Local-first experimental provenance workspace: turns structured experiment notes into a live reasoning graph of hypotheses, evidence, code changes, and lineage.",
-      "version": "0.8.6"
+      "version": "0.8.7"
     }
   ]
 }
