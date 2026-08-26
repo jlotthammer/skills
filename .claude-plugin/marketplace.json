@@ -17,10 +17,10 @@
       "source": {
         "source": "github",
         "repo": "jlotthammer/labcoat",
-        "ref": "labcoat--v0.9.0"
+        "ref": "labcoat--v0.9.1"
       },
       "description": "Local-first experimental provenance workspace: turns structured experiment notes into a live reasoning graph of hypotheses, evidence, code changes, and lineage.",
-      "version": "0.9.0"
+      "version": "0.9.1"
     }
   ]
 }
