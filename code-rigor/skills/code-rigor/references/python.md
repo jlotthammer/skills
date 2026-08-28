@@ -20,13 +20,9 @@ Do not silence a type error with `Any`, a cast, or a suppression when the real d
 
 ## Iteration and objects
 
-Treat generators and iterators as stateful one-shot values.
+Treat generators and iterators as stateful one-shot values. `state-and-lifetime.md` owns the consumption rule.
 
-Do not consume them during logging, validation, or inspection unless the operation owns that consumption or explicitly reconstructs the iterator.
-
-In repeated data-heavy paths, keep data in structured or bulk form when object identity and per-object behavior are not required.
-
-Do not create large numbers of Python objects only to feed a computation that can operate on the existing bulk representation.
+In repeated data-heavy paths, keep data in structured or bulk form when object identity and per-object behavior are not required. `dataflow.md` owns the bulk-computation rule.
 
 ## Imports and initialization
 
@@ -34,12 +30,10 @@ Treat import-time side effects, environment reads, global caches, and singleton 
 
 Use explicit ownership when behavior, ordering, invalidation, or cleanup matters.
 
-Do not hide runtime policy in import side effects when a normal owner can establish it explicitly.
+Do not hide runtime policy in import side effects when an owner can establish it explicitly.
 
 ## Exceptions and context managers
 
 Use a context manager when a resource lifetime follows lexical scope.
 
-Catch an exception only where the code can add policy, recovery, or meaningful context.
-
-Do not catch an exception only to replace it with an ambiguous value or to continue a required operation.
+Catch an exception only where the code can add policy, recovery, or meaningful context. `failure-semantics.md` owns the rules for what a handler must not do.

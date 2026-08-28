@@ -75,8 +75,6 @@ For machinery of the kinds listed under Change discipline in `../SKILL.md`:
 2. use `git log -S <symbol>` or the relevant history to find the introducing commit;
 3. identify the requirement or failure that the change addressed.
 
-Do not remove existing machinery only because its current purpose is not obvious.
-
 ## Refutation
 
 Search for evidence that would make your claim false.

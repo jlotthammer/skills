@@ -19,6 +19,7 @@ Do not keep a test whose main purpose is to freeze:
 - source layout;
 - internal call order;
 - mock choreography;
+- historical cleanup decisions;
 - the current absence of internal code.
 
 An absence test is valid when absence itself is a durable product, security, or compatibility contract.

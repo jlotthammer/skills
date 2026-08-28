@@ -28,7 +28,7 @@ Do not use “check,” “consider,” or similar vague verbs when a more speci
 
 ## Terms
 
-These words carry decisions. They mean the same thing in every reference.
+These words mean the same thing in every file.
 
 - **owner** — the single component responsible for a value, a resource, or a decision: its validity, its changes, and its cleanup.
 - **boundary** — a point where responsibility changes: between owners, between outside the repository and inside it, or between memory and storage. A boundary is *owned* when code here decides what crosses it.
@@ -56,7 +56,7 @@ These words carry decisions. They mean the same thing in every reference.
 
 Most rules here permit an action "when a requirement needs it". A requirement is **stated**. It comes from the user, a specification, an existing public contract, a supported environment, or a measurement.
 
-Do not infer a requirement. An unstated need is a proposal until someone states it. You cannot supply one on the repository's behalf.
+Do not infer a requirement. An unstated need is a proposal until someone states it.
 
 When a decision needs a requirement that nobody has stated:
 
@@ -65,12 +65,12 @@ When a decision needs a requirement that nobody has stated:
 - Otherwise take the smallest option that satisfies the known behavior, and state
   the assumption with the change.
 
-A brainstorming or scoping skill, where the session has one, owns the questions that come before a plan exists. This section owns the requirement you find missing during implementation.
+A brainstorming skill, where present, owns the questions that come before a plan exists. This section owns the requirement found missing during implementation.
 
 ## Core invariants
 
 1. **Repository grounding** — identify the existing owner, callers, contracts, and local conventions before you introduce architecture. Search can locate candidates. Read the implementation to establish behavior. See `references/evidence.md`.
-2. **Canonical interface and source of truth** — one concept should normally have one owner, one canonical architectural path, and one source of truth. A second owner is acceptable only at a boundary the repository does not control, such as a copy held by an external system. Do not create parallel interfaces or sources of truth without a requirement. See `references/interfaces.md`.
+2. **Canonical interface and source of truth** — one concept has one owner, one canonical architectural path, and one source of truth. A second owner is acceptable only at a boundary the repository does not control, such as a copy held by an external system. Do not create parallel interfaces or sources of truth without a requirement. See `references/interfaces.md`.
 3. **Ownership and lifetime** — assign mutable state, resources, and derived information to the scope that owns their validity and cleanup. See `references/state-and-lifetime.md`.
 4. **Canonical dataflow** — canonicalize at owned boundaries. Keep representations aligned with consumers. Remove unnecessary conversion, copying, materialization, serialization, and synchronization. See `references/dataflow.md`.
 5. **Explicit failure semantics** — preserve precise failure information. Do not add fallback, coercion, retry, compatibility behavior, or suppression without a requirement that owns that policy. See `references/failure-semantics.md`.
@@ -103,8 +103,6 @@ Before you remove existing copies, locks, retries, synchronization, compatibilit
 ## Testing
 
 Treat tests as production code. Protect durable behavior, contracts, invariants, and demonstrated regressions.
-
-Do not protect helper names, internal call order, source layout, or historical cleanup decisions unless one of them is itself a durable contract.
 
 When tests are materially added, removed, weakened, mocked, skipped, or made more tolerant, load `references/testing.md`.
 

@@ -41,4 +41,4 @@ Do not hide resource creation inside a helper when doing so obscures cleanup own
 
 Apply this rule to sessions, files, processes, transactions, streams, temporary resources, tasks, and similar handles.
 
-Treat one-shot iterators and generators as mutable state. Consuming one for inspection or validation changes later behavior unless you explicitly reconstruct it.
+Treat one-shot iterators and generators as mutable state. Consuming one for logging, validation, or inspection changes later behavior, unless the operation owns that consumption or explicitly reconstructs it.

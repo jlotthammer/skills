@@ -35,9 +35,13 @@ def test_skill_identities_and_references_resolve():
         assert match
         assert match.group(1).strip() == skill_dir.name
 
-        for rel in re.findall(r"`((?:\.\./)?[^`\n]+\.md)`", text):
-            target = (skill_dir / rel).resolve()
-            assert target.exists(), f"{skill_dir.name}: missing {rel}"
+    # Every backticked .md path in every document must resolve from that
+    # document's own directory. References cross-link each other, and a broken
+    # sibling link fails silently for a reader who trusts it.
+    for doc in skills_root.rglob("*.md"):
+        for rel in re.findall(r"`((?:\.\./)*[^`\n]+\.md)`", doc.read_text()):
+            target = (doc.parent / rel).resolve()
+            assert target.exists(), f"{doc.relative_to(ROOT)}: missing {rel}"
 
 
 SKILL_DOCS = sorted((ROOT / "skills").rglob("*.md"))
