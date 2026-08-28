@@ -11,6 +11,8 @@ Use the smallest architecture that makes the required behavior explicit.
 
 Repository evidence outranks generic design instinct. Preserve or expand required behavior while you remove unnecessary concepts, execution paths, architectural paths, states, representations, transformations, and proof obligations.
 
+A path or a diff is **substantive** when it changes behavior, a contract, ownership, a representation, a lifetime, or a failure mode. A rename, a comment, or a formatting change is not.
+
 ## Directive vocabulary
 
 Use these verbs consistently:
@@ -26,10 +28,25 @@ Use these verbs consistently:
 
 Do not use “check,” “consider,” or similar vague verbs when a more specific directive applies.
 
+## Requirements
+
+Most rules here permit an action "when a requirement needs it". A requirement is **stated**. It comes from the user, a specification, an existing public contract, a supported environment, or a measurement.
+
+Do not infer a requirement. An unstated need is a proposal until someone states it. You cannot supply one on the repository's behalf.
+
+When a decision needs a requirement that nobody has stated:
+
+- If the decision is hard to reverse, or it changes a public contract, stop and
+  ask one specific question. State the options and your recommendation.
+- Otherwise take the smallest option that satisfies the known behavior, and state
+  the assumption with the change.
+
+A brainstorming or scoping skill, where the session has one, owns the questions that come before a plan exists. This section owns the requirement you find missing during implementation.
+
 ## Core invariants
 
 1. **Repository grounding** — identify the existing owner, callers, contracts, and local conventions before you introduce architecture. Search can locate candidates. Read the implementation to establish behavior. See `references/evidence.md`.
-2. **Canonical interface and source of truth** — one concept should normally have one owner, one normal architectural path, and one authoritative state. Do not create parallel interfaces or sources of truth without a requirement. See `references/interfaces.md`.
+2. **Canonical interface and source of truth** — one concept should normally have one owner, one normal architectural path, and one authoritative state. A second owner is acceptable only at a boundary the repository does not control, such as a copy held by an external system. Do not create parallel interfaces or sources of truth without a requirement. See `references/interfaces.md`.
 3. **Ownership and lifetime** — assign mutable state, resources, and derived information to the scope that owns their validity and cleanup. See `references/state-and-lifetime.md`.
 4. **Canonical dataflow** — normalize at real boundaries. Keep representations aligned with consumers. Remove unnecessary conversion, copying, materialization, serialization, and synchronization. See `references/dataflow.md`.
 5. **Explicit failure semantics** — preserve precise failure information. Do not add fallback, coercion, retry, compatibility behavior, or suppression without a requirement that owns that policy. See `references/failure-semantics.md`.

@@ -2,6 +2,12 @@
 
 **Keep the normal execution path visible. Minimize the conditions and states a reader must track at one time.**
 
+An invariant established elsewhere removes local branching and adds to what a
+reader must already know. Prefer the non-local invariant when a named owner
+establishes it and the reader can reach that owner. Prefer a local condition
+when the reader would otherwise reconstruct the invariant from call sites.
+See `dataflow.md`.
+
 ## Branching and nesting
 
 For a function with substantial branching:
@@ -25,6 +31,9 @@ When behavior depends on valid transitions between states, represent those state
 
 Do not encode a state machine as an undocumented combination of booleans, sentinels, exception paths, and repeated conditionals.
 
+Prefer a representation in which an illegal state cannot be constructed. A state
+that cannot exist needs no branch to defend against it.
+
 Keep a direct `match`, dispatcher, parser branch, protocol case, or algorithmic case split when the cases are part of the domain and the explicit form is easier to inspect.
 
 ## Decomposition
@@ -34,6 +43,9 @@ Extract a helper when the helper owns a coherent operation, contract, transforma
 Do not extract helpers only to reduce nesting, line count, cyclomatic complexity, or cognitive complexity.
 
 Do not distribute one cohesive algorithm across helpers when a reader must reconstruct all of them to understand the operation.
+
+Cohesion is the property that everything inside a unit serves one purpose. Judge
+a helper by its cohesion, not by its length.
 
 ## Mechanical complexity checks
 

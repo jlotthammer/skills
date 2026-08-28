@@ -9,7 +9,8 @@ Before you add or change an interface, identify:
 
 - the current owner;
 - every relevant caller;
-- the current contract;
+- the current contract, stated as its preconditions, its postconditions, and the
+  invariants it maintains;
 - the requirement that the interface change must satisfy.
 
 Add genericity only when at least one of these requires it:
@@ -20,6 +21,10 @@ Add genericity only when at least one of these requires it:
 - a second real implementation.
 
 Do not add genericity for a hypothetical future caller.
+
+Coupling is what a caller must know to use an interface correctly. Each
+precondition, ordering rule, and shared representation adds coupling. Reduce
+what the caller must know before you add a mechanism to manage what it knows.
 
 ## Reject unsupported interface complexity
 

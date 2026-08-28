@@ -20,6 +20,12 @@ For derived information, identify all dependencies and the largest scope in whic
 
 Compute the derived value at the earliest owned scope where all dependencies are known and remain valid.
 
+This moves knowledge away from the point of use, and it trades against locally
+comprehensible control flow. The trade is acceptable when a named owner
+establishes the value and the reader can reach that owner. It is not acceptable
+when the reader must reconstruct the invariant from the call sites. See
+`control-flow.md`.
+
 Do not repeatedly rebuild stable indexes, masks, mappings, parsed metadata, layout, normalized configuration, or similar structural data when a longer-lived owner can establish them once.
 
 Do not cache mutable derived state unless you can identify its source of truth and invalidation rule. See `state-and-lifetime.md` when invalidation matters.
@@ -53,6 +59,13 @@ Choose stored representation from the durable contract and the required access p
 Do not persist unstable internal object structure unless that structure is itself part of the contract.
 
 Do not choose a stored form that forces repeated expensive reconstruction when a durable canonical form can avoid it.
+
+Identify what a reader observes when a write stops part way. Where a reader must
+never observe a partial write, write to a temporary location and rename, or use
+the transaction the store provides.
+
+Do not treat a multi-step write as atomic because the steps are adjacent in the
+source.
 
 ## Bulk computation
 

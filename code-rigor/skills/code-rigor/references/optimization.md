@@ -26,3 +26,11 @@ Before you add performance complexity:
 Prefer an optimization that improves correctness, simplicity, and performance through the same representation or ownership decision.
 
 Do not retain a faster path when its added complexity does not pay for a measured or required benefit.
+
+Keep the clear implementation as a reference when an optimized path replaces it.
+Verify the optimized path against the reference on the same inputs. The
+reference gives a reader a mapping from the readable form to the fast form, so
+speed and interpretability do not have to trade against each other.
+
+Report a measured speedup with its uncertainty and the number of runs. A single
+run is not a result.
