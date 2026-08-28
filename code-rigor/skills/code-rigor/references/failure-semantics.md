@@ -8,8 +8,9 @@ Do not:
 
 - replace an error with `None`, zero, an empty value, or a default unless the API contract defines that result;
 - catch, log, and continue when the operation is required to succeed;
-- retry unless you can identify a transient failure that the retry can resolve,
-  and the operation is idempotent or the caller can tolerate repeated effects;
+- retry unless you can identify a transient failure — one that can pass without a
+  code change — that the retry can resolve, and the operation is idempotent or the
+  caller can tolerate repeated effects;
 - coerce internal values “just in case” when the repository controls their representation;
 - distribute compatibility fallbacks across internal code;
 - add a suppression or weaken a check only to make the implementation pass.

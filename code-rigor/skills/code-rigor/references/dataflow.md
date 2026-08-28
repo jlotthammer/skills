@@ -26,7 +26,7 @@ establishes the value and the reader can reach that owner. It is not acceptable
 when the reader must reconstruct the invariant from the call sites. See
 `control-flow.md`.
 
-Do not repeatedly rebuild stable indexes, masks, mappings, parsed metadata, layout, normalized configuration, or similar structural data when a longer-lived owner can establish them once.
+Do not repeatedly rebuild stable indexes, masks, mappings, parsed metadata, layout, canonicalized configuration, or similar structural data when a longer-lived owner can establish them once.
 
 Do not cache mutable derived state unless you can identify its source of truth and invalidation rule. See `state-and-lifetime.md` when invalidation matters.
 

@@ -56,6 +56,6 @@ When a complexity tool reports a violation:
 1. inspect boundaries, state representation, repeated conditions, and nesting;
 2. refactor when the change makes the behavior easier to understand;
 3. do not refactor only to lower the score;
-4. use the repository's approved suppression only when the branching is intrinsic and the clearer implementation still exceeds the configured threshold.
+4. use the repository's approved suppression only when the branching is intrinsic — required by the domain, not by the implementation — and the clearer implementation still exceeds the configured threshold.
 
 Keep numeric thresholds, scoring rules, and tool configuration in repository tooling. Do not duplicate them in this reference.

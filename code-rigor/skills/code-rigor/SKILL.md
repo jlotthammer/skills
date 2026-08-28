@@ -37,7 +37,8 @@ These words carry decisions. They mean the same thing in every reference.
 - **lifetime** — the interval in which a value, a resource, or a derived result stays valid.
 - **representation** — the concrete form a value takes at a point on a path: its type, shape, units, encoding, or layout.
 - **canonical** — the single form or route that the repository agrees on. Every alternative is converted to it or justified by a requirement.
-- **source of truth** — the one place where a concept's authoritative value lives. Every other copy derives from it.
+- **source of truth** — the one place where a concept's current value lives. Every other copy derives from it.
+- **materialization** — a value computed and held in memory or storage, rather than derived where it is used.
 - **machinery** — code that manages something rather than expressing the operation: a cache, a lock, a retry, a wrapper, a mode, a compatibility path.
 - **durable** — a property that survives refactoring, because something outside the implementation depends on it.
 - **concept** — one thing the system reasons about: an entity, an operation, or a rule that a reader would name once.
@@ -69,9 +70,9 @@ A brainstorming or scoping skill, where the session has one, owns the questions 
 ## Core invariants
 
 1. **Repository grounding** — identify the existing owner, callers, contracts, and local conventions before you introduce architecture. Search can locate candidates. Read the implementation to establish behavior. See `references/evidence.md`.
-2. **Canonical interface and source of truth** — one concept should normally have one owner, one canonical architectural path, and one authoritative state. A second owner is acceptable only at a boundary the repository does not control, such as a copy held by an external system. Do not create parallel interfaces or sources of truth without a requirement. See `references/interfaces.md`.
+2. **Canonical interface and source of truth** — one concept should normally have one owner, one canonical architectural path, and one source of truth. A second owner is acceptable only at a boundary the repository does not control, such as a copy held by an external system. Do not create parallel interfaces or sources of truth without a requirement. See `references/interfaces.md`.
 3. **Ownership and lifetime** — assign mutable state, resources, and derived information to the scope that owns their validity and cleanup. See `references/state-and-lifetime.md`.
-4. **Canonical dataflow** — normalize at owned boundaries. Keep representations aligned with consumers. Remove unnecessary conversion, copying, materialization, serialization, and synchronization. See `references/dataflow.md`.
+4. **Canonical dataflow** — canonicalize at owned boundaries. Keep representations aligned with consumers. Remove unnecessary conversion, copying, materialization, serialization, and synchronization. See `references/dataflow.md`.
 5. **Explicit failure semantics** — preserve precise failure information. Do not add fallback, coercion, retry, compatibility behavior, or suppression without a requirement that owns that policy. See `references/failure-semantics.md`.
 6. **Locally comprehensible control flow** — keep the normal execution path visible. Minimize the conditions and states a reader must track at one time. Do not split cohesive logic only to reduce a complexity metric. See `references/control-flow.md`.
 7. **Complexity must reduce a named obligation** — each new abstraction, state, cache, mode, dependency, fast path, or concurrency machinery creates proof obligations. Add it only when it removes or satisfies a specific requirement.
@@ -91,7 +92,7 @@ Use this order unless repository evidence requires a different one:
 1. remove unnecessary machinery;
 2. fix the existing owner;
 3. strengthen the existing contract;
-4. move normalization or derivation to the correct boundary or lifetime;
+4. move canonicalization or derivation to the correct boundary or lifetime;
 5. remove redundant work or representations;
 6. add the smallest new machinery that the requirement needs.
 
@@ -109,7 +110,7 @@ When tests are materially added, removed, weakened, mocked, skipped, or made mor
 
 ## Completion
 
-For a substantial coherent diff, invoke sibling `code-rigor-review` before you report architectural completion.
+For a substantive coherent diff, invoke sibling `code-rigor-review` before you report architectural completion.
 
 Broad correctness, security, and ordinary regression review remain the responsibility of the host's normal code-review process and repository tooling.
 

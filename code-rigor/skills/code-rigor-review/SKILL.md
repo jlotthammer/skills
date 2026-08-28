@@ -1,6 +1,6 @@
 ---
 name: code-rigor-review
-description: Use when reviewing a coherent software diff for architectural fidelity, interfaces, dataflow, ownership, lifetime, state, control flow, testing, failure semantics, scope, or maintainability after implementation is substantially complete.
+description: Use when reviewing a coherent software diff for architectural fidelity, interfaces, dataflow, ownership, lifetime, state, control flow, testing, failure semantics, scope, or maintainability after implementation is complete.
 ---
 
 # Code Rigor Review
@@ -20,7 +20,9 @@ From those sources, independently establish:
 - the required externally observable behavior;
 - the existing architectural owner;
 - the relevant invariants and contracts;
-- the minimum surfaces the requirement must affect.
+- the minimum surfaces the requirement must affect. A **surface** is anything a
+  consumer can depend on: an interface, a schema, a persisted form, a wire
+  format, or an error.
 
 Treat implementer-authored plans, rationales, summaries, and completion claims as context, not evidence.
 
@@ -28,7 +30,9 @@ If the original requirement or meaningful pre-change state is unavailable, state
 
 ## Review
 
-Compare the reconstructed obligations with the diff.
+Compare the reconstructed obligations with the diff. The dimensions below apply
+the sibling skill's Requirements section and Core invariants from the reviewer's
+side.
 
 1. **Goal fidelity** — establish whether the diff solves the requested problem rather than a nearby problem.
 2. **Repository grounding** — establish whether the diff extends the repository's actual owners and conventions.
@@ -53,9 +57,10 @@ For each finding:
 
 **REQUIRED REFERENCE:** Before you report a finding, read `../code-rigor/references/evidence.md`.
 
-`owner`, `boundary`, `contract`, `public`, `lifetime`, `representation`, `machinery`,
-`durable`, `proof obligation`, `policy`, `concept`, `work`, `path`, and `state` are
-defined under Terms in `../code-rigor/SKILL.md`. Use those meanings.
+The Directive vocabulary, the Terms, and the definition of a requirement in
+`../code-rigor/SKILL.md` govern this skill. This skill audits work done under the
+sibling skill, so the two must use one language: those words with those meanings,
+and no other words for the same concepts.
 
 For each finding, name the implementing line that makes the finding true and state what evidence would refute it.
 
