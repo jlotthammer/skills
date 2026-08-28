@@ -11,8 +11,6 @@ Use the smallest architecture that makes the required behavior explicit.
 
 Repository evidence outranks generic design instinct. Preserve or expand required behavior while you remove unnecessary concepts, execution paths, architectural paths, states, representations, transformations, and proof obligations.
 
-A path or a diff is **substantive** when it changes behavior, a contract, ownership, a representation, a lifetime, or a failure mode. A rename, a comment, or a formatting change is not.
-
 ## Directive vocabulary
 
 Use these verbs consistently:
@@ -27,6 +25,23 @@ Use these verbs consistently:
 - **Prefer** — use judgment because more than one option can be correct.
 
 Do not use “check,” “consider,” or similar vague verbs when a more specific directive applies.
+
+## Terms
+
+These words carry decisions. They mean the same thing in every reference.
+
+- **owner** — the single component responsible for a value's validity, mutation, and cleanup.
+- **boundary** — a point where responsibility changes: between owners, between outside the repository and inside it, or between memory and storage. A boundary is *owned* when code here decides what crosses it.
+- **contract** — what a caller may rely on: preconditions, postconditions, the invariants maintained, and the failures the operation can produce.
+- **public** — a contract is public when a consumer you do not control depends on it: another repository, a published package, a persisted format, a command line, or a network API.
+- **lifetime** — the interval in which a value, a resource, or a derived result stays valid.
+- **representation** — the concrete form a value takes at a point on a path: its type, shape, units, encoding, or layout.
+- **machinery** — code that manages something rather than expressing the operation: a cache, a lock, a retry, a wrapper, a mode, a compatibility path.
+- **durable** — a property that survives refactoring, because something outside the implementation depends on it.
+- **proof obligation** — a condition that must stay true for the code to remain correct, and that someone must re-establish after every later change.
+- **substantive** — a path or a diff is substantive when it changes behavior, a contract, ownership, a representation, a lifetime, or a failure mode. A rename, a comment, or a formatting change is not.
+
+**invariant** carries two senses. The numbered items under Core invariants are this skill's rules. Everywhere else an invariant is a condition that holds throughout a scope.
 
 ## Requirements
 
@@ -92,14 +107,14 @@ Broad correctness, security, and ordinary regression review remain the responsib
 
 ## References
 
-Load only the references that apply to the change:
+Load only the references that apply to the change. Each invariant above names its own reference; the rest are described here.
 
-- `references/evidence.md` — establish behavior before you make claims; enumerate exhaustiveness claims; seek refutation.
-- `references/interfaces.md` — API boundaries, ownership, genericity, compatibility, and abstraction quality.
-- `references/dataflow.md` — representation flow, canonicalization, materialization, storage and I/O boundaries, and repeated work.
-- `references/state-and-lifetime.md` — mutable and derived state, caches, resources, aliases, iterators, and invalidation.
-- `references/failure-semantics.md` — errors, recovery, retries, fallbacks, coercion, and suppressions.
-- `references/control-flow.md` — branching, nesting, state transitions, local readability, decomposition, and complexity-tool interpretation.
+- `references/evidence.md`
+- `references/interfaces.md`
+- `references/dataflow.md`
+- `references/state-and-lifetime.md`
+- `references/failure-semantics.md`
+- `references/control-flow.md`
 - `references/testing.md` — durable test contracts, regression tests, mocking, TDD, and implementation-pinning tests.
 - `references/concurrency.md` — task, thread, and process ownership; cancellation; synchronization; resource lifetime.
 - `references/optimization.md` — performance work ordered by elimination of work, lifetime, data movement, algorithmic cost, locality, and only then added machinery.
