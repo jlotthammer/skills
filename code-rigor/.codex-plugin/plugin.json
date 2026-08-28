@@ -1,7 +1,7 @@
 {
   "name": "code-rigor",
   "version": "1.0.0",
-  "description": "Software engineering discipline for maintainable architecture, dataflow, ownership, testing, and optimization.",
+  "description": "Software engineering discipline for maintainable architecture, dataflow, ownership, control flow, testing, and optimization.",
   "author": {
     "name": "Local"
   },
@@ -17,7 +17,7 @@
   "interface": {
     "displayName": "Code Rigor",
     "shortDescription": "Architecture and maintainability discipline",
-    "longDescription": "Guide implementation and review toward repository-grounded interfaces, direct dataflow, explicit ownership, durable tests, and justified complexity.",
+    "longDescription": "Guide implementation and review toward repository-grounded interfaces, direct dataflow, explicit ownership, readable control flow, durable tests, and justified complexity.",
     "developerName": "Local",
     "category": "Productivity",
     "capabilities": [

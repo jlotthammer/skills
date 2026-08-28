@@ -1,46 +1,73 @@
 # Dataflow
 
-**A well-architected path has clear producers, canonical representations, explicit boundaries, and consumers that do not repeatedly reinterpret the same information.**
+**A well-architected path has clear producers, one canonical representation at each owned boundary, and consumers that do not repeatedly reinterpret the same information.**
 
 Trace important paths as:
 
 `source → validation/canonicalization → state/computation → persistence/output`
 
-At each boundary ask:
+For each transition, identify:
 
-- who owns the value now;
-- which representation the consumer requires;
-- whether a copy/allocation/materialization/serialization/synchronization occurs;
+- who owns the value after the transition;
+- the representation the next consumer requires;
+- each copy, allocation, materialization, serialization, synchronization, or device/domain transition;
 - how long derived information remains valid;
-- whether the next consumer immediately reconstructs another form.
+- whether the next consumer immediately reconstructs another representation.
 
 ## Lifetime-aligned derivation
 
-Compute derived information at the earliest scope where all dependencies are known and remain invariant. Repeatedly rebuilding stable indexes, masks, mappings, parsed metadata, layout, normalized configuration, or other structural data usually indicates misplaced ownership.
+For derived information, identify all dependencies and the largest scope in which those dependencies remain invariant.
 
-Do not cache mutable derived state without a clear source of truth and invalidation rule.
+Compute the derived value at the earliest owned scope where all dependencies are known and remain valid.
+
+Do not repeatedly rebuild stable indexes, masks, mappings, parsed metadata, layout, normalized configuration, or similar structural data when a longer-lived owner can establish them once.
+
+Do not cache mutable derived state unless you can identify its source of truth and invalidation rule. See `state-and-lifetime.md` when invalidation matters.
 
 ## Canonical boundaries
 
-Accept flexible or untrusted forms at external boundaries when required. Parse, validate, and canonicalize there. Internal code should not repeatedly defend against representations the system itself controls.
+Accept flexible or untrusted forms at external boundaries only when the contract requires that flexibility.
+
+At the owning boundary:
+
+1. parse;
+2. validate;
+3. canonicalize.
+
+After that boundary, internal code should rely on the established representation.
+
+Do not repeatedly defend against representations that the system itself controls.
 
 ## Materialization
 
-Copies, conversions, serialization, indexing materialization, device/domain transitions, and I/O are real operations. They are justified when a consumer or ownership boundary requires them, not because a local helper finds another representation convenient.
+Treat copies, conversions, serialization, indexing materialization, device or domain transitions, and I/O as real work.
+
+Add one only when a consumer, ownership boundary, persistence contract, or measured performance requirement needs it.
+
+Do not change representation only because a local helper prefers another form.
 
 ## Storage and persistence
 
-Choose stored form according to access patterns and durable contracts. Avoid persistence formats that unnecessarily expose unstable internal object structure or force repeated expensive reconstruction.
+Choose stored representation from the durable contract and the required access pattern.
+
+Do not persist unstable internal object structure unless that structure is itself part of the contract.
+
+Do not choose a stored form that forces repeated expensive reconstruction when a durable canonical form can avoid it.
 
 ## Bulk computation
 
-For numerical/data-heavy paths, preserve bulk representations when they express the computation directly. Do not decompose bulk data into object/scalar work without an algorithmic reason, but do not create enormous intermediates merely to eliminate loops.
+For numerical or data-heavy paths, keep data in bulk form when that form directly expresses the computation.
+
+Do not decompose bulk data into many Python objects or scalar operations without an algorithmic or semantic requirement.
+
+Do not create a very large intermediate only to remove an explicit loop. Compare total work, memory, and locality.
 
 ## Audit
 
-For a changed path ask:
+For each changed data path:
 
-1. Where is the canonical representation established?
-2. What work occurs at each transition?
-3. What is repeated although its inputs are invariant at a larger lifetime?
-4. Can moving a boundary eliminate a representation, transformation, branch, or source of truth?
+1. Identify where the canonical representation is established.
+2. Identify the work performed at each transition.
+3. Identify work that repeats although its inputs remain invariant at a larger lifetime.
+4. Identify representations that exist only to satisfy an intermediate helper.
+5. Determine whether moving a boundary can remove a representation, transformation, branch, or source of truth.

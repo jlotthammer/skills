@@ -1,30 +1,46 @@
 # State and Lifetime
 
-**Every mutable thing needs an owner. Every derived thing needs a validity interval.**
+**Every mutable value needs an owner. Every derived value needs a validity interval.**
 
-Scrutinize shared mutable state, globals/singletons, hidden caches, closures over mutable values, caller-owned mutation, import/startup side effects, long-lived references, environment-dependent state, worker/process state, and resource handles.
+For each new or changed mutable value, identify:
+
+- who can mutate it;
+- who owns its lifetime;
+- what other state it aliases or depends on;
+- what operation ends its validity.
+
+Apply this to shared mutable state, globals and singletons, hidden caches, closures over mutable values, caller-owned mutation, import or startup state, environment-dependent state, worker or process state, and resource handles.
 
 ## Copies and aliases
 
-Do not copy by reflex. A copy should correspond to a known aliasing, mutation, isolation, or lifetime requirement.
+Do not copy by reflex.
 
-Demand a reason before adding a copy; demand evidence before removing an existing one.
+Add a copy only when it satisfies a known aliasing, mutation, isolation, or lifetime requirement.
+
+Before you remove an existing copy, establish why it exists and verify that shared storage cannot change required behavior.
 
 ## Derived state and caches
 
-Before retaining derived state, answer:
+Before you retain a derived value, answer all of these questions:
 
 1. What is the source of truth?
-2. What makes this value valid?
-3. What invalidates it?
-4. Who performs invalidation?
-5. How long may it live?
-6. Is recomputation materially costly?
+2. What dependencies determine the value?
+3. What makes the value valid?
+4. What invalidates it?
+5. Who performs invalidation?
+6. How long may the value live?
+7. Is recomputation materially costly?
 
-If invalidation is vague, the cache is unsafe state.
+If you cannot define invalidation for mutable dependencies, do not retain the derived value as a cache.
+
+If the dependencies remain invariant for a larger owned lifetime, derive the value once at that lifetime instead of repeatedly rebuilding it.
 
 ## Resources and iterators
 
-Resource creation should imply clear cleanup/cancellation ownership. Avoid helpers that open sessions, files, processes, transactions, streams, or temporary resources while obscuring who closes them.
+For each resource, identify who creates it and who closes, cancels, joins, or releases it.
 
-One-shot iterators and generators are stateful; consuming them for inspection or validation changes subsequent behavior unless explicitly reconstructed.
+Do not hide resource creation inside a helper when doing so obscures cleanup ownership.
+
+Apply this rule to sessions, files, processes, transactions, streams, temporary resources, tasks, and similar handles.
+
+Treat one-shot iterators and generators as mutable state. Consuming one for inspection or validation changes later behavior unless you explicitly reconstruct it.

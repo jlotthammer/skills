@@ -2,16 +2,39 @@
 
 **One concept should normally have one owner and one canonical interface.**
 
-Before adding an interface, identify the repository's current owner, callers, and contract. Add genericity only for a current caller, public contract, supported environment, or second real implementation.
+Before you add or change an interface, identify:
 
-Challenge:
+- the current owner;
+- every relevant caller;
+- the current contract;
+- the requirement that the interface change must satisfy.
 
-- parallel legacy/new/fast APIs for one operation;
+Add genericity only when at least one of these requires it:
+
+- a current caller;
+- a public contract;
+- a supported environment;
+- a second real implementation.
+
+Do not add genericity for a hypothetical future caller.
+
+## Reject unsupported interface complexity
+
+Do not introduce these forms unless a requirement needs them:
+
+- parallel legacy, new, or fast APIs for one operation;
 - wrappers that own no policy, transformation, or lifecycle;
-- generic maps, `kwargs`, registries, factories, strategies, or modes used to postpone interface design;
-- deep runtime type/shape/representation branching over data the repository already owns;
+- generic maps, `kwargs`, registries, factories, strategies, or modes that postpone a concrete interface decision;
+- deep runtime type, shape, or representation branching over data the repository controls;
 - compatibility aliases or version paths without an explicit support requirement.
 
-External flexibility is legitimate at real boundaries. Canonicalize once and keep internal contracts specific.
+Flexible external input is valid at a real boundary. Canonicalize it once. Keep internal contracts specific.
 
-An abstraction should remove named duplicated complexity or establish a durable ownership boundary. If deleting it makes the operation clearer without creating duplication, it probably did not own enough to exist.
+## Abstraction test
+
+An abstraction must do at least one concrete job:
+
+- remove duplicated behavior or duplicated policy that you can name; or
+- establish an ownership, lifecycle, or contract boundary that callers rely on.
+
+If deleting the abstraction makes the operation clearer and does not recreate required duplication or break a durable boundary, the abstraction does not own enough to justify its existence.

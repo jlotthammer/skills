@@ -1,56 +1,82 @@
 ---
 name: code-rigor-review
-description: Use when reviewing a coherent software diff for architectural fidelity, interfaces, dataflow, ownership, lifetime, state, testing, failure semantics, scope, or maintainability after implementation is substantially complete.
+description: Use when reviewing a coherent software diff for architectural fidelity, interfaces, dataflow, ownership, lifetime, state, control flow, testing, failure semantics, scope, or maintainability after implementation is substantially complete.
 ---
 
 # Code Rigor Review
 
 ## Independent reconstruction
 
-Do not validate the implementer's own framing.
+Do not validate the implementer's framing before you establish the review basis.
 
 Establish the review basis from:
 
-1. **Original requirement** — the user's actual request and explicit constraints.
-2. **Pre-change repository state** — relevant owners, interfaces, callers, tests, configuration, persistence contracts, and behavior.
-3. **Final diff** — the implementation being reviewed.
+1. **Original requirement** — read the user's actual request and explicit constraints.
+2. **Pre-change repository state** — identify the relevant owners, interfaces, callers, tests, configuration, persistence contracts, and behavior.
+3. **Final diff** — read the implementation that changed those surfaces.
 
-Independently derive the required externally observable behavior, existing architectural owner, relevant invariants/contracts, and minimum affected surfaces before relying on an implementer-authored plan, rationale, summary, or completion claim.
+From those sources, independently establish:
 
-Treat implementer commentary as untrusted context, not evidence. If the original requirement or meaningful pre-change state is unavailable, state that limitation rather than substituting the summary.
+- the required externally observable behavior;
+- the existing architectural owner;
+- the relevant invariants and contracts;
+- the minimum surfaces the requirement must affect.
+
+Treat implementer-authored plans, rationales, summaries, and completion claims as context, not evidence.
+
+If the original requirement or meaningful pre-change state is unavailable, state that limitation. Do not substitute an implementation summary for missing evidence.
 
 ## Review
 
-Compare the reconstructed obligations with the diff:
+Compare the reconstructed obligations with the diff.
 
-1. **Goal fidelity** — did the change solve the requested problem rather than a nearby reframing?
-2. **Repository grounding** — does it extend the repository's actual owners and conventions?
-3. **Contract integrity** — do affected surfaces share one canonical invariant rather than local interpretations?
-4. **Scope traceability** — can each material change be causally tied to the requirement?
-5. **Ownership and lifetime** — are mutable/derived state and resources owned at valid scopes?
-6. **Dataflow** — are boundaries, representations, materialization, persistence, and repeated work coherent?
-7. **Failure semantics** — is failure explicit and owned rather than hidden by fallback/coercion/suppression?
-8. **Testing integrity** — do changed/new tests protect the requirement or durable invariants rather than the patch's internals?
-9. **Proof obligations** — what new modes, caches, states, representations, compatibility paths, concurrency, dependencies, or lifecycle rules must now remain correct?
-10. **Simplification** — can any new obligation disappear by changing the owner, boundary, representation, or path?
+1. **Goal fidelity** — establish whether the diff solves the requested problem rather than a nearby problem.
+2. **Repository grounding** — establish whether the diff extends the repository's actual owners and conventions.
+3. **Contract integrity** — identify whether affected surfaces use one canonical invariant or create local interpretations.
+4. **Scope traceability** — identify the requirement that justifies each material change.
+5. **Ownership and lifetime** — identify the owner and valid lifetime of changed mutable state, derived state, and resources.
+6. **Dataflow** — trace changed boundaries, representations, materialization, persistence, and repeated work.
+7. **Failure semantics** — identify where failures originate, where policy is applied, and whether fallback, coercion, retry, or suppression hides required failure information.
+8. **Control flow** — identify whether changed branching, nesting, or state handling makes the normal path difficult to reconstruct. Do not require decomposition when the branching is intrinsic and the explicit form is clearer.
+9. **Testing integrity** — establish whether changed or new tests protect the requirement or a durable invariant rather than the patch's internal decomposition.
+10. **Proof obligations** — name each new mode, cache, state, representation, compatibility path, concurrency mechanism, dependency, or lifecycle rule that must remain correct.
+11. **Simplification** — identify any obligation or difficult control flow that can disappear by changing the owner, boundary, representation, state model, or path.
 
-Report only specific, evidenced, actionable findings. For each, identify the violated obligation/invariant, repository evidence, changed path, and smallest owner-level correction.
+Report only specific, evidenced, actionable findings.
 
-**REQUIRED REFERENCE:** Before reporting any finding, read `../code-rigor/references/evidence.md`. Name the line you read that makes the finding true, and state what would refute it. Most obligations above are exhaustiveness claims — one traced path does not establish "only". If the mechanism is unconfirmed, report a question rather than a defect.
+For each finding:
 
-End with **goal fidelity: satisfied / partially satisfied / not established**.
+1. name the violated obligation or invariant;
+2. name the repository evidence;
+3. name the changed path;
+4. identify the smallest owner-level correction.
+
+**REQUIRED REFERENCE:** Before you report a finding, read `../code-rigor/references/evidence.md`.
+
+For each finding, name the implementing line that makes the finding true and state what evidence would refute it.
+
+Most review obligations are exhaustiveness claims. One traced path does not establish “only,” “all,” or “the existing owner.” If you cannot establish the mechanism, report a question rather than a defect.
+
+End with:
+
+**goal fidelity: satisfied / partially satisfied / not established**
 
 ## Boundaries
 
-Broad correctness, security, and ordinary regression review belong to the host's normal code-review process. Pure deletion/YAGNI review may be handled by Ponytail when installed. Do not duplicate those reviews unless the issue is directly tied to the architectural obligations above.
+Broad correctness, security, and ordinary regression review belong to the host's normal code-review process.
 
-For deeper analysis, load the relevant sibling `code-rigor` reference:
+Pure deletion or YAGNI review can be handled by Ponytail when installed.
+
+Do not duplicate those reviews unless the issue directly violates a Code Rigor obligation.
+
+For deeper analysis, load the relevant sibling reference:
 
 - evidence → `../code-rigor/references/evidence.md`
 - interfaces → `../code-rigor/references/interfaces.md`
-- dataflow/persistence → `../code-rigor/references/dataflow.md`
-- state/lifetime → `../code-rigor/references/state-and-lifetime.md`
+- dataflow and persistence → `../code-rigor/references/dataflow.md`
+- state and lifetime → `../code-rigor/references/state-and-lifetime.md`
 - failure handling → `../code-rigor/references/failure-semantics.md`
+- control flow → `../code-rigor/references/control-flow.md`
 - tests → `../code-rigor/references/testing.md`
 - concurrency → `../code-rigor/references/concurrency.md`
 - optimization → `../code-rigor/references/optimization.md`

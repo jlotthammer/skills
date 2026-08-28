@@ -9,7 +9,7 @@
     {
       "name": "code-rigor",
       "source": "./code-rigor",
-      "description": "Software engineering discipline for maintainable architecture, dataflow, ownership, testing, and optimization.",
+      "description": "Software engineering discipline for maintainable architecture, dataflow, ownership, control flow, testing, and optimization.",
       "version": "1.0.0"
     },
     {

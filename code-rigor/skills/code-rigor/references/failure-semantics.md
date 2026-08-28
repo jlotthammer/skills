@@ -2,15 +2,23 @@
 
 **Do not convert precise failure into ambiguous state.**
 
-Prefer validating at the boundary that owns the requirement, then let internal code rely on the established contract.
+Validate a requirement at the boundary that owns it. After that boundary, let internal code rely on the established contract.
 
-Challenge:
+Do not:
 
-- broad recovery returning `None`, zero, empty values, or defaults;
-- catch/log/continue when the operation is actually required;
-- retry without a modeled transient failure;
-- deep coercion "just in case";
-- compatibility fallbacks distributed through the system;
-- suppressions or weakened checks added to accommodate the implementation.
+- replace an error with `None`, zero, an empty value, or a default unless the API contract defines that result;
+- catch, log, and continue when the operation is required to succeed;
+- retry unless you can identify a transient failure that the retry can resolve;
+- coerce internal values “just in case” when the repository controls their representation;
+- distribute compatibility fallbacks across internal code;
+- add a suppression or weaken a check only to make the implementation pass.
 
-Defaults, coercion, degradation, and retry can be correct when they are explicit product/runtime behavior. Keep them at the layer that owns that policy and preserve original error context where useful.
+Defaults, coercion, degradation, retry, and fallback can be correct product or runtime behavior.
+
+When the requirement needs one of them:
+
+1. define the policy at the layer that owns it;
+2. preserve the original error context when it is needed for diagnosis;
+3. keep the policy out of lower layers that do not own the decision.
+
+Do not make downstream code infer whether an ambiguous value means success, absence, degradation, or failure.

@@ -1,25 +1,45 @@
 # Python Specialization
 
-Load only for Python code.
+Load this reference only for Python code.
 
-Apply the general ownership/interface/dataflow rules to Python's dynamic runtime rather than compensating for unclear contracts with defensive flexibility.
+Apply the general ownership, interface, dataflow, state, failure, and control-flow rules to Python's dynamic runtime.
+
+Do not compensate for an unclear internal contract with defensive flexibility.
 
 ## Interfaces and typing
 
-Use typing to make owned contracts explicit, not to manufacture abstraction. Avoid broad `Any`, shapeless dictionaries, runtime `getattr`/`hasattr` cascades, or optional parameters when the repository controls the concrete shape.
+Use typing to make an owned contract explicit.
 
-Let Ruff/type checkers own mechanically decidable hygiene. Use Code Rigor for semantic questions they cannot answer.
+Do not use broad `Any`, shapeless dictionaries, runtime `getattr` or `hasattr` cascades, or optional parameters when the repository controls a more specific shape.
+
+Use broad types only when the contract is genuinely broad.
+
+Let Ruff and type checkers enforce mechanically decidable hygiene. Use Code Rigor to decide the semantic correction when tooling reports a problem.
+
+Do not silence a type error with `Any`, a cast, or a suppression when the real defect is an incorrect ownership or interface contract.
 
 ## Iteration and objects
 
-Remember that generators/iterators are stateful and one-shot. Avoid accidental consumption during logging/validation.
+Treat generators and iterators as stateful one-shot values.
 
-In repeated data-heavy paths, avoid converting structured/bulk data into large numbers of Python objects unless object semantics are actually required.
+Do not consume them during logging, validation, or inspection unless the operation owns that consumption or explicitly reconstructs the iterator.
+
+In repeated data-heavy paths, keep data in structured or bulk form when object identity and per-object behavior are not required.
+
+Do not create large numbers of Python objects only to feed a computation that can operate on the existing bulk representation.
 
 ## Imports and initialization
 
-Import-time side effects, environment reads, global caches, and singleton initialization create hidden process-lifetime state. Prefer explicit ownership when behavior or cleanup matters.
+Treat import-time side effects, environment reads, global caches, and singleton initialization as process-lifetime state.
+
+Use explicit ownership when behavior, ordering, invalidation, or cleanup matters.
+
+Do not hide runtime policy in import side effects when a normal owner can establish it explicitly.
 
 ## Exceptions and context managers
 
-Use context managers for resources whose lifetime follows a lexical scope. Catch exceptions only where the code can add policy, recovery, or meaningful context.
+Use a context manager when a resource lifetime follows lexical scope.
+
+Catch an exception only where the code can add policy, recovery, or meaningful context.
+
+Do not catch an exception only to replace it with an ambiguous value or to continue a required operation.
