@@ -2,9 +2,12 @@
 
 **Search locates candidates. It does not establish behavior.**
 
-## Establish a finding
+Matching a symptom to an anti-pattern name is a hypothesis. Establish the
+mechanism before you act on it or report it.
 
-Before you report a finding:
+## Establish a claim
+
+Before you act on a claim, or report one:
 
 1. Identify the implementation that controls the behavior.
 2. Read the implementing line or block.
@@ -14,11 +17,16 @@ Before you report a finding:
 
 Do not use caller-side evidence to establish callee behavior. Read the callee.
 
-If you cannot establish the mechanism, report a question rather than a defect.
+If you cannot establish the mechanism, ask a question. Do not report a defect,
+and do not change the code, on a hypothesis.
+
+A passing test establishes that the tested contract holds for the tested inputs.
+It does not establish behavior that the test does not exercise.
 
 ## Exhaustiveness claims
 
-Treat words such as “only,” “all,” “the existing owner,” and “redundant” as exhaustiveness claims.
+Treat words such as “only,” “all,” “never,” “unused,” “dead,” “no caller,” “the
+existing owner,” and “redundant” as exhaustiveness claims.
 
 Do not establish an exhaustiveness claim from a sample.
 
@@ -28,11 +36,40 @@ Compare the enumeration against a text search.
 
 If semantic search finds fewer sites than text search, treat the disagreement as a tool failure until you resolve it. A cold or incomplete index can return too few results without an error.
 
+### References a search cannot find
+
+A reference can exist that neither search finds. Before you make an
+exhaustiveness claim, identify whether the symbol can be reached by name at
+runtime:
+
+- attribute lookup from a string;
+- a registry, a plugin table, or an entry point;
+- configuration;
+- serialized data;
+- a template;
+- a database column or a query.
+
+Where any of these applies, enumeration does not establish exhaustiveness.
+Establish the reachable set from the registry or the configuration that holds the
+names, or state the claim as unverified.
+
+### When no scope-aware tool is available
+
+Identify what the claim licenses, and match the evidence to it.
+
+- Where the claim licenses a removal, or a change to a public contract,
+  enumerate with a scope-aware tool. Where no such tool is available, do not
+  remove and do not change the contract. State the claim as unverified and ask.
+- Otherwise enumerate by text search across the repository, and state what that
+  method cannot see.
+
+Do not present an unverified claim as established.
+
 ## Existing machinery
 
 When you need to establish why existing machinery exists, inspect its history.
 
-For a retry, lock, copy, compatibility path, cache, synchronization step, or similar mechanism:
+For machinery of the kinds listed under Change discipline in `../SKILL.md`:
 
 1. use `git blame` to identify the change;
 2. use `git log -S <symbol>` or the relevant history to find the introducing commit;
@@ -49,5 +86,3 @@ Examples:
 - A canonicalization at function entry refutes “internal code repeatedly defends against flexible input.”
 - A second real caller can refute “this generic interface has no requirement.”
 - A mutation after cache construction can refute “this cached value is valid for the object lifetime.”
-
-Matching a symptom to an anti-pattern name is a hypothesis. Establish the mechanism before you report it as a finding.
