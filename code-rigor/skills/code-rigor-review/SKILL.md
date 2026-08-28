@@ -7,7 +7,7 @@ description: Use when reviewing a coherent software diff for architectural fidel
 
 ## Independent reconstruction
 
-Do not validate the implementer's framing before you establish the review basis.
+Do not adopt the implementer's framing as the review basis.
 
 Establish the review basis from:
 

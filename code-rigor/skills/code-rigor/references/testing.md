@@ -49,11 +49,21 @@ If the contract changed, update the test to state the new durable behavior.
 
 ## Mocking
 
-Mock a real external or expensive boundary when isolation requires it.
+Mock an external or expensive boundary when isolation requires it.
 
 Do not mock internals only to make the current decomposition easy to assert.
 
 Use real collaborators, fakes, or integration tests when interaction between components is the behavior under test.
+
+## Determinism and isolation
+
+A test that can fail without a code change protects nothing, and it costs trust in the whole suite.
+
+Control time, randomness, ordering, and the filesystem or network wherever the test touches them. A test that depends on wall-clock time, an unseeded generator, or a live service fails for reasons the contract does not name.
+
+Each test must pass alone and in any order. Do not let one test depend on state that another test created.
+
+Treat a test that fails intermittently as a defect in the test or in the code. Do not retry it until it passes.
 
 ## TDD
 

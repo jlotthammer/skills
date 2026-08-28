@@ -1,6 +1,6 @@
 ---
 name: code-rigor
-description: Use when implementing, refactoring, debugging, or optimizing substantive software where architecture, interfaces, dataflow, state, control flow, testing, failure semantics, maintainability, or performance materially matter.
+description: Use when implementing, refactoring, debugging, or optimizing software where architecture, interfaces, dataflow, state, control flow, testing, failure semantics, maintainability, or performance materially matter.
 ---
 
 # Code Rigor
@@ -16,7 +16,7 @@ Repository evidence outranks generic design instinct. Preserve or expand require
 Use these verbs consistently:
 
 - **Identify** — locate and name the relevant owner, caller, contract, path, state, representation, or boundary.
-- **Establish** — confirm a claim from repository evidence.
+- **Establish** — confirm a claim from repository evidence. With a value or a condition as its object, the word keeps its ordinary sense: bring it into being at an owner.
 - **Define** — specify behavior or a contract that the change must introduce.
 - **Measure** — obtain quantitative evidence.
 - **Verify** — confirm an expected property or behavior by execution or direct observation.
@@ -30,16 +30,19 @@ Do not use “check,” “consider,” or similar vague verbs when a more speci
 
 These words carry decisions. They mean the same thing in every reference.
 
-- **owner** — the single component responsible for a value's validity, mutation, and cleanup.
+- **owner** — the single component responsible for a value, a resource, or a decision: its validity, its changes, and its cleanup.
 - **boundary** — a point where responsibility changes: between owners, between outside the repository and inside it, or between memory and storage. A boundary is *owned* when code here decides what crosses it.
 - **contract** — what a caller may rely on: preconditions, postconditions, the invariants maintained, and the failures the operation can produce.
 - **public** — a contract is public when a consumer you do not control depends on it: another repository, a published package, a persisted format, a command line, or a network API. A contract that is not public is internal.
 - **lifetime** — the interval in which a value, a resource, or a derived result stays valid.
 - **representation** — the concrete form a value takes at a point on a path: its type, shape, units, encoding, or layout.
+- **canonical** — the single form or route that the repository agrees on. Every alternative is converted to it or justified by a requirement.
+- **source of truth** — the one place where a concept's authoritative value lives. Every other copy derives from it.
 - **machinery** — code that manages something rather than expressing the operation: a cache, a lock, a retry, a wrapper, a mode, a compatibility path.
 - **durable** — a property that survives refactoring, because something outside the implementation depends on it.
 - **concept** — one thing the system reasons about: an entity, an operation, or a rule that a reader would name once.
 - **policy** — a decision about what the system does, as distinct from the code that carries it out: a default, a retry rule, a timeout, a device choice.
+- **idempotent** — an operation that can run more than once with the same effect as running once.
 - **work** — computation, allocation, I/O, copying, conversion, or synchronization that the machine performs.
 - **path** — always qualified. An *execution path* is a route through code. An *architectural path* is the way a concept is reached. A *data path* is the route a value takes from source to output.
 - **state** — mutable data with an owner and a lifetime. Where the word means a reachable condition of a state machine, the text says so.
@@ -73,7 +76,7 @@ A brainstorming or scoping skill, where the session has one, owns the questions 
 6. **Locally comprehensible control flow** — keep the normal execution path visible. Minimize the conditions and states a reader must track at one time. Do not split cohesive logic only to reduce a complexity metric. See `references/control-flow.md`.
 7. **Complexity must reduce a named obligation** — each new abstraction, state, cache, mode, dependency, fast path, or concurrency machinery creates proof obligations. Add it only when it removes or satisfies a specific requirement.
 
-For a substantive path, identify:
+For a substantive change, identify:
 
 **OWNER → INTERFACE → LIFETIME → REPRESENTATION → WORK**
 

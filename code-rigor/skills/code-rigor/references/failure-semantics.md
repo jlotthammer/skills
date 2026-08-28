@@ -2,7 +2,7 @@
 
 **Do not convert precise failure into ambiguous state.**
 
-Validate a requirement at the boundary that owns it. After that boundary, let internal code rely on the established contract.
+Validate input against a requirement at the boundary that owns it. After that boundary, let internal code rely on the established contract.
 
 Do not:
 
@@ -38,10 +38,11 @@ For each call that leaves the process, or that waits on another task, identify:
 
 Define a time limit for every wait that a remote system, a subprocess, or
 another task can extend. A wait with no limit converts a slow dependency into a
-stopped system.
+stopped system. State where each limit comes from: a requirement, a
+measurement, or an assumption named as one.
 
 Identify which operations continue when a dependency is unavailable, and which
 cannot. Do not let one unavailable dependency stop work that does not need it.
 
-Do not report a partial failure as a total failure when the completed work is
-durable. State what completed.
+Do not report a partial failure as a total failure when the completed work
+persists. State what completed.

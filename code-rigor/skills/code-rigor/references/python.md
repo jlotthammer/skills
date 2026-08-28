@@ -12,9 +12,9 @@ Use typing to make an owned contract explicit.
 
 Do not use broad `Any`, shapeless dictionaries, runtime `getattr` or `hasattr` cascades, or optional parameters when the repository controls a more specific shape.
 
-Use broad types only when the contract is genuinely broad.
+Use broad types only when the contract is broad.
 
-Let Ruff and type checkers enforce mechanically decidable hygiene. Use Code Rigor to decide the semantic correction when tooling reports a problem.
+Let the repository's linter and type checkers enforce mechanically decidable hygiene. Use Code Rigor to decide the semantic correction when tooling reports a problem.
 
 Do not silence a type error with `Any`, a cast, or a suppression when the real defect is an incorrect ownership or interface contract.
 

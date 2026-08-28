@@ -16,9 +16,8 @@ Do not skip directly to step 6 because it is easier to benchmark locally.
 Before you add performance complexity:
 
 1. identify the boundary whose performance matters;
-2. measure that boundary, or establish the dominant cost structurally when direct measurement is not practical;
-3. separate major cost categories. If you cannot separate them, state which costs
-   the measurement combines;
+2. measure that boundary. Where you cannot measure it directly, establish the dominant cost from the structure of the code, and state that the cost is structural rather than measured;
+3. separate major cost categories. If you cannot separate them, state which costs the measurement combines;
 4. identify why the proposed owner or boundary is the correct place for the optimization;
 5. name each new state or proof obligation the optimization introduces;
 6. define how you will verify the result.
@@ -27,10 +26,6 @@ Prefer an optimization that improves correctness, simplicity, and performance th
 
 Do not retain a faster path when its added complexity does not pay for a measured or required benefit.
 
-Keep the clear implementation as a reference when an optimized path replaces it.
-Verify the optimized path against the reference on the same inputs. The
-reference gives a reader a mapping from the readable form to the fast form, so
-speed and interpretability do not have to trade against each other.
+Keep the clear implementation as a reference when an optimized path replaces it. Verify the optimized path against the reference on the same inputs. The reference gives a reader a mapping from the readable form to the fast form, so speed and interpretability do not have to trade against each other.
 
-Report a measured speedup with its uncertainty and the number of runs. A single
-run is not a result.
+Report a measured speedup with its uncertainty and the number of runs. A single run is not a result.

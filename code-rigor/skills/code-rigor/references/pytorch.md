@@ -13,7 +13,7 @@ For each changed `detach`, `no_grad`, inference-mode, in-place, copy, or view op
 - whether later mutation is possible;
 - whether the consumer requires an independent value.
 
-Do not add or remove these operations by superstition.
+Do not add or remove one of these operations without establishing those four answers.
 
 ## Device, dtype, and layout
 

@@ -1,8 +1,8 @@
 # Dataflow
 
-**A well-architected path has clear producers, one canonical representation at each owned boundary, and consumers that do not repeatedly reinterpret the same information.**
+**A well-architected data path has clear producers, one canonical representation at each owned boundary, and consumers that do not repeatedly reinterpret the same information.**
 
-Trace important paths as:
+Trace substantive data paths as:
 
 `source → validation/canonicalization → state/computation → persistence/output`
 
@@ -46,9 +46,9 @@ Do not repeatedly defend against representations that the system itself controls
 
 ## Materialization
 
-Treat copies, conversions, serialization, indexing materialization, device or domain transitions, and I/O as real work.
+Treat copies, conversions, serialization, indexing materialization, device or domain transitions, and I/O as work.
 
-Add one only when a consumer, ownership boundary, persistence contract, or measured performance requirement needs it.
+Add any of these only when a consumer, an ownership boundary, a persistence contract, or a measured performance requirement needs it.
 
 Do not change representation only because a local helper prefers another form.
 
@@ -71,7 +71,7 @@ source.
 
 For numerical or data-heavy paths, keep data in bulk form when that form directly expresses the computation.
 
-Do not decompose bulk data into many Python objects or scalar operations without an algorithmic or semantic requirement.
+Do not decompose bulk data into many per-element objects or scalar operations without an algorithmic or semantic requirement.
 
 Do not create a very large intermediate only to remove an explicit loop. Compare total work, memory, and locality.
 
@@ -83,4 +83,4 @@ For each changed data path:
 2. Identify the work performed at each transition.
 3. Identify work that repeats although its inputs remain invariant at a larger lifetime.
 4. Identify representations that exist only to satisfy an intermediate helper.
-5. Determine whether moving a boundary can remove a representation, transformation, branch, or source of truth.
+5. Identify whether moving a boundary can remove a representation, a transformation, a branch, or a duplicate source of truth.

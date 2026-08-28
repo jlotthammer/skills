@@ -1,6 +1,6 @@
 # State and Lifetime
 
-**Every mutable value needs an owner. Every derived value needs a validity interval.**
+**Every mutable value needs an owner. Every derived value needs a lifetime.**
 
 For each new or changed mutable value, identify:
 
@@ -12,8 +12,6 @@ For each new or changed mutable value, identify:
 Apply this to shared mutable state, globals and singletons, hidden caches, closures over mutable values, caller-owned mutation, import or startup state, environment-dependent state, worker or process state, and resource handles.
 
 ## Copies and aliases
-
-Do not copy by reflex.
 
 Add a copy only when it satisfies a known aliasing, mutation, isolation, or lifetime requirement.
 
@@ -33,7 +31,7 @@ Before you retain a derived value, answer all of these questions:
 
 If you cannot define invalidation for mutable dependencies, do not retain the derived value as a cache.
 
-If the dependencies remain invariant for a larger owned lifetime, derive the value once at that lifetime instead of repeatedly rebuilding it.
+Where the dependencies remain invariant for a larger owned lifetime, `dataflow.md` owns the rule: derive the value once at that lifetime.
 
 ## Resources and iterators
 

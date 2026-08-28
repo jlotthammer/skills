@@ -17,7 +17,7 @@ For a function with substantial branching:
 3. Identify conditions that are tested more than once.
 4. Identify independent state dimensions that are nested together.
 5. Identify booleans or sentinel values that encode an implicit state model.
-6. Determine whether an earlier boundary can establish a condition once.
+6. Identify whether an earlier boundary can establish the condition once.
 
 Use an early return, `continue`, or another guard when it removes unnecessary nesting and keeps required cleanup and state changes explicit.
 

@@ -30,7 +30,7 @@ existing owner,” and “redundant” as exhaustiveness claims.
 
 Do not establish an exhaustiveness claim from a sample.
 
-Enumerate every relevant site with a scope-aware tool such as LSP `findReferences` or `ast-grep`.
+Enumerate every site that the claim covers, with a scope-aware tool such as LSP `findReferences` or `ast-grep`.
 
 Compare the enumeration against a text search.
 
@@ -53,7 +53,7 @@ Where any of these applies, enumeration does not establish exhaustiveness.
 Establish the reachable set from the registry or the configuration that holds the
 names, or state the claim as unverified.
 
-### When no scope-aware tool is available
+### Match the evidence to what the claim licenses
 
 Identify what the claim licenses, and match the evidence to it.
 
@@ -83,6 +83,6 @@ Search for evidence that would make your claim false.
 
 Examples:
 
-- A canonicalization at function entry refutes “internal code repeatedly defends against flexible input.”
-- A second real caller can refute “this generic interface has no requirement.”
+- A canonicalization at function entry refutes “flexible input reaches internal code.”
+- An existing second caller can refute “this generic interface has no requirement.”
 - A mutation after cache construction can refute “this cached value is valid for the object lifetime.”
