@@ -24,7 +24,7 @@ Do not establish an exhaustiveness claim from a sample.
 
 Enumerate every relevant site with a scope-aware tool such as LSP `findReferences` or `ast-grep`.
 
-Cross-check the enumeration with text search when practical.
+Compare the enumeration against a text search.
 
 If semantic search finds fewer sites than text search, treat the disagreement as a tool failure until you resolve it. A cold or incomplete index can return too few results without an error.
 

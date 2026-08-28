@@ -17,7 +17,8 @@ Before you add performance complexity:
 
 1. identify the boundary whose performance matters;
 2. measure that boundary, or establish the dominant cost structurally when direct measurement is not practical;
-3. separate major cost categories when possible;
+3. separate major cost categories. If you cannot separate them, state which costs
+   the measurement combines;
 4. identify why the proposed owner or boundary is the correct place for the optimization;
 5. name each new state or proof obligation the optimization introduces;
 6. define how you will verify the result.

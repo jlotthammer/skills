@@ -19,7 +19,7 @@ Use these verbs consistently:
 - **Establish** — confirm a claim from repository evidence.
 - **Define** — specify behavior or a contract that the change must introduce.
 - **Measure** — obtain quantitative evidence.
-- **Verify** — check that an expected property or behavior holds.
+- **Verify** — confirm an expected property or behavior by execution or direct observation.
 - **Remove** — delete existing machinery only after you establish that its requirement does not apply.
 - **Do not** — prohibited unless the instruction gives an explicit exception.
 - **Prefer** — use judgment because more than one option can be correct.
@@ -29,10 +29,10 @@ Do not use “check,” “consider,” or similar vague verbs when a more speci
 ## Core invariants
 
 1. **Repository grounding** — identify the existing owner, callers, contracts, and local conventions before you introduce architecture. Search can locate candidates. Read the implementation to establish behavior. See `references/evidence.md`.
-2. **Canonical interface and source of truth** — one concept should normally have one owner, one normal path, and one authoritative state. Do not create parallel interfaces or sources of truth without a requirement.
-3. **Ownership and lifetime** — assign mutable state, resources, and derived information to the scope that owns their validity and cleanup.
-4. **Canonical dataflow** — normalize at real boundaries. Keep representations aligned with consumers. Remove unnecessary conversion, copying, materialization, serialization, and synchronization.
-5. **Explicit failure semantics** — preserve precise failure information. Do not add fallback, coercion, retry, compatibility behavior, or suppression without a requirement that owns that policy.
+2. **Canonical interface and source of truth** — one concept should normally have one owner, one normal architectural path, and one authoritative state. Do not create parallel interfaces or sources of truth without a requirement. See `references/interfaces.md`.
+3. **Ownership and lifetime** — assign mutable state, resources, and derived information to the scope that owns their validity and cleanup. See `references/state-and-lifetime.md`.
+4. **Canonical dataflow** — normalize at real boundaries. Keep representations aligned with consumers. Remove unnecessary conversion, copying, materialization, serialization, and synchronization. See `references/dataflow.md`.
+5. **Explicit failure semantics** — preserve precise failure information. Do not add fallback, coercion, retry, compatibility behavior, or suppression without a requirement that owns that policy. See `references/failure-semantics.md`.
 6. **Locally comprehensible control flow** — keep the normal execution path visible. Minimize the conditions and states a reader must track at one time. Do not split cohesive logic only to reduce a complexity metric. See `references/control-flow.md`.
 7. **Complexity must reduce a named obligation** — each new abstraction, state, cache, mode, dependency, fast path, or concurrency mechanism creates proof obligations. Add it only when it removes or satisfies a specific requirement.
 

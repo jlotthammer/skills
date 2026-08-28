@@ -2,6 +2,9 @@
 
 **One concept should normally have one owner and one canonical interface.**
 
+This reference owns the interface half of that invariant. For the authoritative-state
+half, see `state-and-lifetime.md`.
+
 Before you add or change an interface, identify:
 
 - the current owner;

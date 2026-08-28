@@ -21,7 +21,8 @@ An absence test is valid when absence itself is a durable product, security, or 
 For a bug fix:
 
 1. reproduce the failure at the narrowest stable boundary that exposes the required behavior;
-2. verify the test fails against the broken behavior when practical;
+2. verify that the test fails against the broken behavior. If you cannot reproduce
+   the broken state, record that the test was never observed to fail;
 3. fix the implementation;
 4. verify the test passes;
 5. keep the test only if it protects a durable contract after the patch is complete.
