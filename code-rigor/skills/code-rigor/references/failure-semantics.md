@@ -18,9 +18,9 @@ Defaults, coercion, degradation, retry, and fallback can be correct product or r
 
 When the requirement needs one of them:
 
-1. define the policy at the layer that owns it;
+1. define the policy at the owner of that decision;
 2. preserve the original error context when it is needed for diagnosis;
-3. keep the policy out of lower layers that do not own the decision.
+3. keep the policy out of code on the other side of that owner's boundary.
 
 Do not make downstream code infer whether an ambiguous value means success, absence, degradation, or failure.
 

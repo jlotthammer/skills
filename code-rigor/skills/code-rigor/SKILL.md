@@ -9,7 +9,7 @@ description: Use when implementing, refactoring, debugging, or optimizing substa
 
 Use the smallest architecture that makes the required behavior explicit.
 
-Repository evidence outranks generic design instinct. Preserve or expand required behavior while you remove unnecessary concepts, execution paths, architectural paths, states, representations, transformations, and proof obligations.
+Repository evidence outranks generic design instinct. Preserve or expand required behavior while you remove unnecessary concepts, execution paths, architectural paths, reachable states, representations, transformations, and proof obligations.
 
 ## Directive vocabulary
 
@@ -33,11 +33,16 @@ These words carry decisions. They mean the same thing in every reference.
 - **owner** — the single component responsible for a value's validity, mutation, and cleanup.
 - **boundary** — a point where responsibility changes: between owners, between outside the repository and inside it, or between memory and storage. A boundary is *owned* when code here decides what crosses it.
 - **contract** — what a caller may rely on: preconditions, postconditions, the invariants maintained, and the failures the operation can produce.
-- **public** — a contract is public when a consumer you do not control depends on it: another repository, a published package, a persisted format, a command line, or a network API.
+- **public** — a contract is public when a consumer you do not control depends on it: another repository, a published package, a persisted format, a command line, or a network API. A contract that is not public is internal.
 - **lifetime** — the interval in which a value, a resource, or a derived result stays valid.
 - **representation** — the concrete form a value takes at a point on a path: its type, shape, units, encoding, or layout.
 - **machinery** — code that manages something rather than expressing the operation: a cache, a lock, a retry, a wrapper, a mode, a compatibility path.
 - **durable** — a property that survives refactoring, because something outside the implementation depends on it.
+- **concept** — one thing the system reasons about: an entity, an operation, or a rule that a reader would name once.
+- **policy** — a decision about what the system does, as distinct from the code that carries it out: a default, a retry rule, a timeout, a device choice.
+- **work** — computation, allocation, I/O, copying, conversion, or synchronization that the machine performs.
+- **path** — always qualified. An *execution path* is a route through code. An *architectural path* is the way a concept is reached. A *data path* is the route a value takes from source to output.
+- **state** — mutable data with an owner and a lifetime. Where the word means a reachable condition of a state machine, the text says so.
 - **proof obligation** — a condition that must stay true for the code to remain correct, and that someone must re-establish after every later change.
 - **substantive** — a path or a diff is substantive when it changes behavior, a contract, ownership, a representation, a lifetime, or a failure mode. A rename, a comment, or a formatting change is not.
 
@@ -61,12 +66,12 @@ A brainstorming or scoping skill, where the session has one, owns the questions 
 ## Core invariants
 
 1. **Repository grounding** — identify the existing owner, callers, contracts, and local conventions before you introduce architecture. Search can locate candidates. Read the implementation to establish behavior. See `references/evidence.md`.
-2. **Canonical interface and source of truth** — one concept should normally have one owner, one normal architectural path, and one authoritative state. A second owner is acceptable only at a boundary the repository does not control, such as a copy held by an external system. Do not create parallel interfaces or sources of truth without a requirement. See `references/interfaces.md`.
+2. **Canonical interface and source of truth** — one concept should normally have one owner, one canonical architectural path, and one authoritative state. A second owner is acceptable only at a boundary the repository does not control, such as a copy held by an external system. Do not create parallel interfaces or sources of truth without a requirement. See `references/interfaces.md`.
 3. **Ownership and lifetime** — assign mutable state, resources, and derived information to the scope that owns their validity and cleanup. See `references/state-and-lifetime.md`.
-4. **Canonical dataflow** — normalize at real boundaries. Keep representations aligned with consumers. Remove unnecessary conversion, copying, materialization, serialization, and synchronization. See `references/dataflow.md`.
+4. **Canonical dataflow** — normalize at owned boundaries. Keep representations aligned with consumers. Remove unnecessary conversion, copying, materialization, serialization, and synchronization. See `references/dataflow.md`.
 5. **Explicit failure semantics** — preserve precise failure information. Do not add fallback, coercion, retry, compatibility behavior, or suppression without a requirement that owns that policy. See `references/failure-semantics.md`.
 6. **Locally comprehensible control flow** — keep the normal execution path visible. Minimize the conditions and states a reader must track at one time. Do not split cohesive logic only to reduce a complexity metric. See `references/control-flow.md`.
-7. **Complexity must reduce a named obligation** — each new abstraction, state, cache, mode, dependency, fast path, or concurrency mechanism creates proof obligations. Add it only when it removes or satisfies a specific requirement.
+7. **Complexity must reduce a named obligation** — each new abstraction, state, cache, mode, dependency, fast path, or concurrency machinery creates proof obligations. Add it only when it removes or satisfies a specific requirement.
 
 For a substantive path, identify:
 
@@ -85,7 +90,7 @@ Use this order unless repository evidence requires a different one:
 3. strengthen the existing contract;
 4. move normalization or derivation to the correct boundary or lifetime;
 5. remove redundant work or representations;
-6. add the smallest new mechanism that the requirement needs.
+6. add the smallest new machinery that the requirement needs.
 
 Do not create a second path to avoid repairing the first.
 

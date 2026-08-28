@@ -39,7 +39,7 @@ Compare the reconstructed obligations with the diff.
 7. **Failure semantics** — identify where failures originate, where policy is applied, and whether fallback, coercion, retry, or suppression hides required failure information.
 8. **Control flow** — identify whether changed branching, nesting, or state handling makes the normal path difficult to reconstruct. Do not require decomposition when the branching is intrinsic and the explicit form is clearer.
 9. **Testing integrity** — establish whether changed or new tests protect the requirement or a durable invariant rather than the patch's internal decomposition.
-10. **Proof obligations** — name each new mode, cache, state, representation, compatibility path, concurrency mechanism, dependency, or lifecycle rule that must remain correct.
+10. **Proof obligations** — name each new mode, cache, state, representation, compatibility path, concurrency machinery, dependency, or lifecycle rule that must remain correct.
 11. **Simplification** — identify any obligation or difficult control flow that can disappear by changing the owner, boundary, representation, state model, or path.
 
 Report only specific, evidenced, actionable findings.
@@ -53,9 +53,13 @@ For each finding:
 
 **REQUIRED REFERENCE:** Before you report a finding, read `../code-rigor/references/evidence.md`.
 
+`owner`, `boundary`, `contract`, `public`, `lifetime`, `representation`, `machinery`,
+`durable`, `proof obligation`, `policy`, `concept`, `work`, `path`, and `state` are
+defined under Terms in `../code-rigor/SKILL.md`. Use those meanings.
+
 For each finding, name the implementing line that makes the finding true and state what evidence would refute it.
 
-Most review obligations are exhaustiveness claims. One traced path does not establish “only,” “all,” or “the existing owner.” If you cannot establish the mechanism, report a question rather than a defect.
+Most review claims are exhaustiveness claims. One traced path does not establish “only,” “all,” or “the existing owner.” If you cannot establish how the behavior arises, report a question rather than a defect.
 
 End with:
 

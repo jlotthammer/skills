@@ -23,7 +23,7 @@ Do not add genericity for a hypothetical future caller.
 
 Coupling is what a caller must know to use an interface correctly. Each
 precondition, ordering rule, and shared representation adds coupling. Reduce
-what the caller must know before you add a mechanism to manage what it knows.
+what the caller must know before you add machinery to manage what it knows.
 
 ## Reject unsupported interface complexity
 

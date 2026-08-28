@@ -1,8 +1,8 @@
 # Concurrency
 
-**Concurrency adds ownership, ordering, cancellation, synchronization, and failure obligations. Add it only for a real concurrency requirement or a measured bottleneck.**
+**Concurrency adds ownership, ordering, cancellation, synchronization, and failure obligations. Add it only for a concurrency requirement or a measured bottleneck.**
 
-Before you add a task, thread, process, worker pool, queue, lock, or similar mechanism, identify:
+Before you add a task, thread, process, worker pool, queue, lock, or similar machinery, identify:
 
 1. who creates and owns it;
 2. who waits, joins, cancels, or shuts it down;

@@ -2,8 +2,8 @@
 
 **Search locates candidates. It does not establish behavior.**
 
-Matching a symptom to an anti-pattern name is a hypothesis. Establish the
-mechanism before you act on it or report it.
+Matching a symptom to an anti-pattern name is a hypothesis. Establish how the
+behavior arises before you act on it or report it.
 
 ## Establish a claim
 
@@ -17,7 +17,7 @@ Before you act on a claim, or report one:
 
 Do not use caller-side evidence to establish callee behavior. Read the callee.
 
-If you cannot establish the mechanism, ask a question. Do not report a defect,
+If you cannot establish how the behavior arises, ask a question. Do not report a defect,
 and do not change the code, on a hypothesis.
 
 A passing test establishes that the tested contract holds for the tested inputs.

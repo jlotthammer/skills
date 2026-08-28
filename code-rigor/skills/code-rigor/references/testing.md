@@ -34,7 +34,7 @@ For a bug fix:
 4. verify the test passes;
 5. keep the test only if it protects a durable contract after the patch is complete.
 
-Do not add a test only to record that an internal helper, path, feature, or compatibility layer was removed.
+Do not add a test only to record that an internal helper, path, feature, or compatibility path was removed.
 
 ## Existing tests
 
