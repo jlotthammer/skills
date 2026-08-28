@@ -57,10 +57,7 @@ For each finding:
 
 **REQUIRED REFERENCE:** Before you report a finding, read `../code-rigor/references/evidence.md`.
 
-The Directive vocabulary, the Terms, and the definition of a requirement in
-`../code-rigor/SKILL.md` govern this skill. This skill audits work done under the
-sibling skill, so the two must use one language: those words with those meanings,
-and no other words for the same concepts.
+The Directive vocabulary, Terms, and Requirements sections of `../code-rigor/SKILL.md` govern this skill.
 
 For each finding, name the implementing line that makes the finding true and state what evidence would refute it.
 
