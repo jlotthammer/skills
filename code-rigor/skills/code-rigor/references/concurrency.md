@@ -27,6 +27,9 @@ Define what happens when a bounded queue is full: the producer waits, the
 producer fails, or the queue drops work. That choice is backpressure, and it
 belongs to the requirement that owns throughput.
 
+`failure-semantics.md` owns time limits for waits and what a caller does when one
+expires.
+
 Retries, queues, locks, worker pools, and background tasks create additional states that must remain correct during failure and shutdown.
 
 Add one only when the requirement or measurement justifies those additional obligations.

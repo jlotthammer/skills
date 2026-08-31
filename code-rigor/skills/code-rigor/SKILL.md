@@ -1,6 +1,6 @@
 ---
 name: code-rigor
-description: Use when implementing, refactoring, debugging, or optimizing software where architecture, interfaces, dataflow, state, control flow, testing, failure semantics, maintainability, or performance materially matter.
+description: Use when implementing, refactoring, debugging, or optimizing software where architecture, interfaces, dataflow, state, control flow, testing, failure semantics, maintainability, or performance matter.
 ---
 
 # Code Rigor
@@ -33,6 +33,7 @@ These words mean the same thing in every file.
 - **owner** — the single component responsible for a value, a resource, or a decision: its validity, its changes, and its cleanup.
 - **boundary** — a point where responsibility changes: between owners, between outside the repository and inside it, or between memory and storage. A boundary is *owned* when code here decides what crosses it.
 - **contract** — what a caller may rely on: preconditions, postconditions, the invariants maintained, and the failures the operation can produce.
+- **interface** — the named operations and types through which callers reach a concept. Its contract is what those callers may rely on.
 - **public** — a contract is public when a consumer you do not control depends on it: another repository, a published package, a persisted format, a command line, or a network API. A contract that is not public is internal.
 - **lifetime** — the interval in which a value, a resource, or a derived result stays valid.
 - **representation** — the concrete form a value takes at a point on a path: its type, shape, units, encoding, or layout.
@@ -45,7 +46,7 @@ These words mean the same thing in every file.
 - **policy** — a decision about what the system does, as distinct from the code that carries it out: a default, a retry rule, a timeout, a device choice.
 - **idempotent** — an operation that can run more than once with the same effect as running once.
 - **work** — computation, allocation, I/O, copying, conversion, or synchronization that the machine performs.
-- **path** — always qualified. An *execution path* is a route through code. An *architectural path* is the way a concept is reached. A *data path* is the route a value takes from source to output.
+- **path** — an *execution path* is a route through code; an *architectural path* is the way a concept is reached; a *data path* is the route a value takes from source to output. Qualify the word where the sense is not clear from context.
 - **state** — mutable data with an owner and a lifetime. Where the word means a reachable condition of a state machine, the text says so.
 - **proof obligation** — a condition that must stay true for the code to remain correct, and that someone must re-establish after every later change.
 - **substantive** — a path or a diff is substantive when it changes behavior, a contract, ownership, a representation, a lifetime, or a failure mode. A rename, a comment, or a formatting change is not.
@@ -54,14 +55,15 @@ These words mean the same thing in every file.
 
 ## Requirements
 
-Most rules here permit an action "when a requirement needs it". A requirement is **stated**. It comes from the user, a specification, an existing public contract, a supported environment, or a measurement.
+Most rules here permit an action "when a requirement needs it". A requirement is **stated**. It comes from the user, a specification, an existing public contract, an existing caller or implementation in the repository, a supported environment (one the repository declares), or a measurement.
 
 Do not infer a requirement. An unstated need is a proposal until someone states it.
 
 When a decision needs a requirement that nobody has stated:
 
-- If the decision is hard to reverse, or it changes a public contract, stop and
-  ask one specific question. State the options and your recommendation.
+- If reverting the diff cannot undo the decision — it changes a public contract,
+  migrates persisted data, or has effects outside the repository — stop and ask
+  one specific question. State the options and your recommendation.
 - Otherwise take the smallest option that satisfies the known behavior, and state
   the assumption with the change.
 
@@ -70,7 +72,7 @@ A brainstorming skill, where present, owns the questions that come before a plan
 ## Core invariants
 
 1. **Repository grounding** — identify the existing owner, callers, contracts, and local conventions before you introduce architecture. Search can locate candidates. Read the implementation to establish behavior. See `references/evidence.md`.
-2. **Canonical interface and source of truth** — one concept has one owner, one canonical architectural path, and one source of truth. A second owner is acceptable only at a boundary the repository does not control, such as a copy held by an external system. Do not create parallel interfaces or sources of truth without a requirement. See `references/interfaces.md`.
+2. **Canonical interface and source of truth** — one concept has one owner, one canonical interface, and one source of truth. A second owner is acceptable only at a boundary the repository does not control, such as a copy held by an external system. Do not create parallel interfaces or sources of truth without a requirement. See `references/interfaces.md`.
 3. **Ownership and lifetime** — assign mutable state, resources, and derived information to the scope that owns their validity and cleanup. See `references/state-and-lifetime.md`.
 4. **Canonical dataflow** — canonicalize at owned boundaries. Keep representations aligned with consumers. Remove unnecessary conversion, copying, materialization, serialization, and synchronization. See `references/dataflow.md`.
 5. **Explicit failure semantics** — preserve precise failure information. Do not add fallback, coercion, retry, compatibility behavior, or suppression without a requirement that owns that policy. See `references/failure-semantics.md`.
@@ -104,17 +106,17 @@ Before you remove existing copies, locks, retries, synchronization, compatibilit
 
 Treat tests as production code. Protect durable behavior, contracts, invariants, and demonstrated regressions.
 
-When tests are materially added, removed, weakened, mocked, skipped, or made more tolerant, load `references/testing.md`.
+When a change adds, removes, weakens, mocks, skips, or loosens tests, load `references/testing.md`.
 
 ## Completion
 
-For a substantive coherent diff, invoke sibling `code-rigor-review` before you report architectural completion.
+For a substantive diff, invoke sibling `code-rigor-review` before you report the change complete.
 
 Broad correctness, security, and ordinary regression review remain the responsibility of the host's normal code-review process and repository tooling.
 
 ## References
 
-Load only the references that apply to the change. Each invariant above names its own reference; the rest are described here.
+Load only the references that apply to the change. Invariants 1 to 6 name their own references; the rest are described here.
 
 - `references/evidence.md`
 - `references/interfaces.md`

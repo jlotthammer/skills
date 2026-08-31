@@ -28,14 +28,14 @@ An absence test is valid when absence itself is a durable product, security, or 
 
 For a bug fix:
 
-1. reproduce the failure at the narrowest stable boundary that exposes the required behavior;
+1. reproduce the failure at the narrowest boundary that has a durable contract and exposes the required behavior;
 2. verify that the test fails against the broken behavior. If you cannot reproduce
    the broken state, record that the test was never observed to fail;
 3. fix the implementation;
 4. verify the test passes;
 5. keep the test only if it protects a durable contract after the patch is complete.
 
-Do not add a test only to record that an internal helper, path, feature, or compatibility path was removed.
+Do not add a test only to record that an internal helper, execution path, feature, or compatibility path was removed.
 
 ## Existing tests
 
@@ -50,7 +50,7 @@ If the contract changed, update the test to state the new durable behavior.
 
 ## Mocking
 
-Mock an external or expensive boundary when isolation requires it.
+Mock an external boundary, or one measured too costly for the suite, when isolation requires it.
 
 Do not mock internals only to make the current decomposition easy to assert.
 
@@ -74,7 +74,7 @@ Derive the test from the requirement and existing contract.
 
 Do not derive the test from the implementation structure you already intend to write.
 
-More tests do not automatically provide more confidence. Keep tests that reject meaningful wrong behavior.
+More tests do not automatically provide more confidence.
 
 ## Mechanical coverage checks
 

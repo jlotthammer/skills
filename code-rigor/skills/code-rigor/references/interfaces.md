@@ -2,8 +2,8 @@
 
 **One concept has one owner and one canonical interface.**
 
-This reference owns the interface half of that invariant. For the source-of-truth
-half, see `state-and-lifetime.md`.
+This reference owns the interface half of that invariant. Invariant 2 and Terms in
+`../SKILL.md` own the source-of-truth half.
 
 Before you add or change an interface, identify:
 
@@ -33,7 +33,7 @@ Do not introduce these forms unless a requirement needs them:
 - wrappers that own no policy, transformation, or lifecycle;
 - generic maps, `kwargs`, registries, factories, strategies, or modes that postpone a concrete interface decision;
 - deep runtime type, shape, or representation branching over data the repository controls;
-- compatibility aliases or version paths without an explicit support requirement.
+- compatibility aliases or version paths without a stated requirement.
 
 Flexible external input is valid at an owned boundary. Keep internal contracts specific. See `dataflow.md` for how to canonicalize at that boundary.
 
@@ -56,10 +56,10 @@ not control.
 
 1. Expand. Add the new form beside the old one. Both work.
 2. Migrate. Move every caller you own to the new form.
-3. Contract. Remove the old form once no caller you must support depends on it.
+3. Contract. Remove the old form once no caller that a stated requirement covers depends on it.
 
 Each step is separately reversible, and step 3 needs the enumeration that
 `evidence.md` requires for a removal.
 
 Do not keep the expanded state after migration completes. Two forms with no
-support requirement is the parallel API this reference rejects.
+stated requirement is the parallel API this reference rejects.

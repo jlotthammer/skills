@@ -26,7 +26,7 @@ From those sources, independently establish:
 
 Treat implementer-authored plans, rationales, summaries, and completion claims as context, not evidence.
 
-If the original requirement or meaningful pre-change state is unavailable, state that limitation. Do not substitute an implementation summary for missing evidence.
+If the original requirement, or the pre-change state of the surfaces the diff touches, is unavailable, state that limitation. Do not substitute an implementation summary for missing evidence.
 
 ## Review
 
@@ -37,11 +37,11 @@ side.
 1. **Goal fidelity** — establish whether the diff solves the requested problem rather than a nearby problem.
 2. **Repository grounding** — establish whether the diff extends the repository's actual owners and conventions.
 3. **Contract integrity** — identify whether affected surfaces use one canonical invariant or create local interpretations.
-4. **Scope traceability** — identify the requirement that justifies each material change.
+4. **Scope traceability** — identify the requirement that justifies each substantive change.
 5. **Ownership and lifetime** — identify the owner and valid lifetime of changed mutable state, derived state, and resources.
 6. **Dataflow** — trace changed boundaries, representations, materialization, persistence, and repeated work.
 7. **Failure semantics** — identify where failures originate, where policy is applied, and whether fallback, coercion, retry, or suppression hides required failure information.
-8. **Control flow** — identify whether changed branching, nesting, or state handling makes the normal path difficult to reconstruct. Do not require decomposition when the branching is intrinsic and the explicit form is clearer.
+8. **Control flow** — identify whether changed branching, nesting, or state handling makes the normal execution path difficult to reconstruct. Do not require decomposition when the branching is intrinsic and the explicit form is clearer.
 9. **Testing integrity** — establish whether changed or new tests protect the requirement or a durable invariant rather than the patch's internal decomposition.
 10. **Proof obligations** — name each new mode, cache, state, representation, compatibility path, concurrency machinery, dependency, or lifecycle rule that must remain correct.
 11. **Simplification** — identify any obligation or difficult control flow that can disappear by changing the owner, boundary, representation, state model, or path.
@@ -52,7 +52,7 @@ For each finding:
 
 1. name the violated obligation or invariant;
 2. name the repository evidence;
-3. name the changed path;
+3. name the changed execution or data path;
 4. identify the smallest owner-level correction.
 
 **REQUIRED REFERENCE:** Before you report a finding, read `../code-rigor/references/evidence.md`.

@@ -26,6 +26,6 @@ Prefer an optimization that improves correctness, simplicity, and performance th
 
 Do not retain a faster path when its added complexity does not pay for a measured or required benefit.
 
-Keep the clear implementation as a reference when an optimized path replaces it. Verify the optimized path against the reference on the same inputs. The reference gives a reader a mapping from the readable form to the fast form, so speed and interpretability do not have to trade against each other.
+Keep the clear implementation as a test oracle when an optimized path replaces it. Verify the optimized path against the oracle on the same inputs. The oracle gives a reader a mapping from the readable form to the fast form, so speed and interpretability do not have to trade against each other. Do not expose the oracle as a callable path in production code.
 
 Report a measured speedup with its uncertainty and the number of runs. A single run is not a result.

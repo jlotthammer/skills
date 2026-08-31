@@ -37,6 +37,8 @@ Identify whether the value:
 
 Do not use module state only because it is convenient storage.
 
+Identify who sets and restores training mode. Dropout and batch normalization change behavior with it.
+
 ## Memory lifetime
 
 Identify what must exist simultaneously:
@@ -51,6 +53,10 @@ Identify what must exist simultaneously:
 Fix unnecessary retention or ownership at its source.
 
 Do not treat cache clearing or arbitrary detaching as a substitute for a defined memory lifetime.
+
+## Synchronization
+
+Device work is asynchronous. Synchronize before you observe or time a result. An unsynchronized measurement times the enqueue, not the work.
 
 ## Checkpoints
 

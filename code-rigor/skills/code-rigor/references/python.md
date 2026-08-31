@@ -28,6 +28,8 @@ In repeated data-heavy paths, keep data in structured or bulk form when object i
 
 Treat import-time side effects, environment reads, global caches, and singleton initialization as process-lifetime state.
 
+A mutable default parameter value evaluates once at definition and becomes shared process-lifetime state.
+
 Use explicit ownership when behavior, ordering, invalidation, or cleanup matters.
 
 Do not hide runtime policy in import side effects when an owner can establish it explicitly.
@@ -36,4 +38,4 @@ Do not hide runtime policy in import side effects when an owner can establish it
 
 Use a context manager when a resource lifetime follows lexical scope.
 
-Catch an exception only where the code can add policy, recovery, or meaningful context. `failure-semantics.md` owns the rules for what a handler must not do.
+Catch an exception only where the code can add policy, recovery, or context that diagnosis needs. `failure-semantics.md` owns the rules for what a handler must not do.

@@ -10,7 +10,7 @@ See `dataflow.md`.
 
 ## Branching and nesting
 
-For a function with substantial branching:
+For a function whose branching the change adds to, or that a complexity tool flags:
 
 1. Identify the normal execution path.
 2. Identify nested conditions that hide that path.

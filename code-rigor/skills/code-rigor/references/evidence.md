@@ -30,11 +30,11 @@ existing owner,” and “redundant” as exhaustiveness claims.
 
 Do not establish an exhaustiveness claim from a sample.
 
-Enumerate every site that the claim covers, with a scope-aware tool such as LSP `findReferences` or `ast-grep`.
+Enumerate every site that the claim covers. “Match the evidence to what the claim licenses” sets the required method.
 
 Compare the enumeration against a text search.
 
-If semantic search finds fewer sites than text search, treat the disagreement as a tool failure until you resolve it. A cold or incomplete index can return too few results without an error.
+If the scope-aware enumeration finds fewer sites than the text search, treat the disagreement as a tool failure until you resolve it. A cold or incomplete index can return too few results without an error.
 
 ### References a search cannot find
 
@@ -58,8 +58,9 @@ names, or state the claim as unverified.
 Identify what the claim licenses, and match the evidence to it.
 
 - Where the claim licenses a removal, or a change to a public contract,
-  enumerate with a scope-aware tool. Where no such tool is available, do not
-  remove and do not change the contract. State the claim as unverified and ask.
+  enumerate with a scope-aware tool such as LSP `findReferences` or `ast-grep`.
+  Where no such tool is available, do not remove and do not change the
+  contract. State the claim as unverified and ask.
 - Otherwise enumerate by text search across the repository, and state what that
   method cannot see.
 
