@@ -1,7 +1,5 @@
 # Optimization
 
-**Remove unnecessary work before you add machinery to perform that work faster.**
-
 Use this order:
 
 1. eliminate work that does not need to happen;
@@ -26,6 +24,6 @@ Prefer an optimization that improves correctness, simplicity, and performance th
 
 Do not retain a faster path when its added complexity does not pay for a measured or required benefit.
 
-Keep the clear implementation as a test oracle when an optimized path replaces it. Verify the optimized path against the oracle on the same inputs. The oracle gives a reader a mapping from the readable form to the fast form, so speed and interpretability do not have to trade against each other. Do not expose the oracle as a callable path in production code.
+Keep the clear implementation as a test oracle when an optimized path replaces it. Verify the optimized path against the oracle on the same inputs. The oracle maps the readable form to the fast form. Do not expose the oracle as a callable path in production code.
 
 Report a measured speedup with its uncertainty and the number of runs. A single run is not a result.

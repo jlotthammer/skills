@@ -1,7 +1,5 @@
 # Dataflow
 
-**A well-architected data path has clear producers, one canonical representation at each owned boundary, and consumers that do not repeatedly reinterpret the same information.**
-
 Trace substantive data paths as:
 
 `source → validation/canonicalization → state/computation → persistence/output`

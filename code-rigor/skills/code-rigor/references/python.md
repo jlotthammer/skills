@@ -1,9 +1,5 @@
 # Python Specialization
 
-Load this reference only for Python code.
-
-Apply the general ownership, interface, dataflow, state, failure, and control-flow rules to Python's dynamic runtime.
-
 Do not compensate for an unclear internal contract with defensive flexibility.
 
 ## Interfaces and typing

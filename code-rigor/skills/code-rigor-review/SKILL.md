@@ -53,15 +53,15 @@ For each finding:
 1. name the violated obligation or invariant;
 2. name the repository evidence;
 3. name the changed execution or data path;
-4. identify the smallest owner-level correction.
+4. identify the smallest owner-level correction;
+5. name the implementing line that makes the finding true;
+6. state what evidence would refute it.
 
 **REQUIRED REFERENCE:** Before you report a finding, read `../code-rigor/references/evidence.md`.
 
 The Directive vocabulary, Terms, and Requirements sections of `../code-rigor/SKILL.md` govern this skill.
 
-For each finding, name the implementing line that makes the finding true and state what evidence would refute it.
-
-Most review claims are exhaustiveness claims. One traced path does not establish “only,” “all,” or “the existing owner.” If you cannot establish how the behavior arises, report a question rather than a defect.
+Most review claims are exhaustiveness claims; the required reference's exhaustiveness and refutation rules govern them.
 
 End with:
 
@@ -75,16 +75,4 @@ Pure deletion or YAGNI review can be handled by Ponytail when installed.
 
 Do not duplicate those reviews unless the issue directly violates a Code Rigor obligation.
 
-For deeper analysis, load the relevant sibling reference:
-
-- evidence → `../code-rigor/references/evidence.md`
-- interfaces → `../code-rigor/references/interfaces.md`
-- dataflow and persistence → `../code-rigor/references/dataflow.md`
-- state and lifetime → `../code-rigor/references/state-and-lifetime.md`
-- failure handling → `../code-rigor/references/failure-semantics.md`
-- control flow → `../code-rigor/references/control-flow.md`
-- tests → `../code-rigor/references/testing.md`
-- concurrency → `../code-rigor/references/concurrency.md`
-- optimization → `../code-rigor/references/optimization.md`
-- Python → `../code-rigor/references/python.md`
-- PyTorch → `../code-rigor/references/pytorch.md`
+For deeper analysis, load the relevant reference from `../code-rigor/references/`. The sibling SKILL.md lists them.

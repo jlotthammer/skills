@@ -1,9 +1,7 @@
 # Interfaces
 
-**One concept has one owner and one canonical interface.**
-
-This reference owns the interface half of that invariant. Invariant 2 and Terms in
-`../SKILL.md` own the source-of-truth half.
+This reference owns the interface half of invariant 2 in `../SKILL.md`. Terms and
+the invariant own the source-of-truth half.
 
 Before you add or change an interface, identify:
 
@@ -61,5 +59,4 @@ not control.
 Each step is separately reversible, and step 3 needs the enumeration that
 `evidence.md` requires for a removal.
 
-Do not keep the expanded state after migration completes. Two forms with no
-stated requirement is the parallel API this reference rejects.
+Do not keep the expanded state after migration completes.

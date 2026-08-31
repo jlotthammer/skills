@@ -1,7 +1,5 @@
 # Testing
 
-**Tests protect durable contracts, not the current implementation.**
-
 A useful test rejects a plausible implementation that violates required behavior.
 
 For each test you add, name the wrong implementation that the test rejects. If
@@ -60,7 +58,7 @@ Use real collaborators, fakes, or integration tests when interaction between com
 
 A test that can fail without a code change protects nothing, and it costs trust in the whole suite.
 
-Control time, randomness, ordering, and the filesystem or network wherever the test touches them. A test that depends on wall-clock time, an unseeded generator, or a live service fails for reasons the contract does not name.
+Control time, randomness, ordering, and the filesystem or network wherever the test touches them.
 
 Each test must pass alone and in any order. Do not let one test depend on state that another test created.
 
@@ -73,8 +71,6 @@ Use tests-first when the test can state desired behavior independently of the im
 Derive the test from the requirement and existing contract.
 
 Do not derive the test from the implementation structure you already intend to write.
-
-More tests do not automatically provide more confidence.
 
 ## Mechanical coverage checks
 

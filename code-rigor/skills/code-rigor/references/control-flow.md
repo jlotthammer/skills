@@ -1,7 +1,5 @@
 # Control Flow
 
-**Keep the normal execution path visible. Minimize the conditions and states a reader must track at one time.**
-
 An invariant established elsewhere removes local branching and adds to what a
 reader must already know. Prefer the non-local invariant when a named owner
 establishes it and the reader can reach that owner. Prefer a local condition

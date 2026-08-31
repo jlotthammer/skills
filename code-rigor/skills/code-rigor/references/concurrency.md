@@ -31,5 +31,3 @@ belongs to the requirement that owns throughput.
 expires.
 
 Retries, queues, locks, worker pools, and background tasks create additional states that must remain correct during failure and shutdown.
-
-Add one only when the requirement or measurement justifies those additional obligations.

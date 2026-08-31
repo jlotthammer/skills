@@ -1,7 +1,5 @@
 # State and Lifetime
 
-**Every mutable value needs an owner. Every derived value needs a lifetime.**
-
 For each new or changed mutable value, identify:
 
 - who can mutate it;

@@ -1,7 +1,5 @@
 # Failure Semantics
 
-**Do not convert precise failure into ambiguous state.**
-
 Validate input against a requirement at the boundary that owns it. After that boundary, let internal code rely on the established contract.
 
 Do not:

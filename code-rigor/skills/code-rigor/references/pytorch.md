@@ -1,19 +1,15 @@
 # PyTorch Specialization
 
-Load this reference only for PyTorch code.
-
 Treat autograd, storage aliasing, device, dtype, layout, module state, synchronization, and device-memory lifetime as extensions of the general ownership and dataflow rules.
 
 ## Autograd and storage
 
-For each changed `detach`, `no_grad`, inference-mode, in-place, copy, or view operation, establish:
+For each `detach`, `no_grad`, inference-mode, in-place, copy, or view operation the change adds, removes, or alters, establish:
 
 - whether gradients must flow through the value;
 - whether storage is shared;
 - whether later mutation is possible;
 - whether the consumer requires an independent value.
-
-Do not add or remove one of these operations without establishing those four answers.
 
 ## Device, dtype, and layout
 

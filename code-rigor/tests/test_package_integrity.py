@@ -52,14 +52,16 @@ def _lines(path):
         yield number, line
 
 
-def test_review_offers_the_same_references_as_the_skill():
-    """code-rigor-review audits work done under code-rigor, so the two must not
-    drift. A reference added to one and not the other is the first drift."""
+def test_skill_offers_every_reference_on_disk():
+    """The always-loaded SKILL.md is the one list of references. It must match
+    the directory, and the review skill must point at that list, not copy it."""
     skill = (ROOT / "skills/code-rigor/SKILL.md").read_text()
-    review = (ROOT / "skills/code-rigor-review/SKILL.md").read_text()
     offered = set(re.findall(r"`references/([a-z-]+\.md)`", skill))
-    loaded = set(re.findall(r"`\.\./code-rigor/references/([a-z-]+\.md)`", review))
-    assert offered == loaded, f"skill offers {offered - loaded}, review loads {loaded - offered}"
+    on_disk = {p.name for p in (ROOT / "skills/code-rigor/references").glob("*.md")}
+    assert offered == on_disk, f"offered-not-on-disk {offered - on_disk}, on-disk-not-offered {on_disk - offered}"
+
+    review = (ROOT / "skills/code-rigor-review/SKILL.md").read_text()
+    assert "`../code-rigor/references/" in review, "review lost its pointer to the references"
 
 
 def test_no_vague_verbs():

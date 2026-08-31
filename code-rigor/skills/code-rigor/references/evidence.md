@@ -1,9 +1,6 @@
 # Evidence
 
-**Search locates candidates. It does not establish behavior.**
-
-Matching a symptom to an anti-pattern name is a hypothesis. Establish how the
-behavior arises before you act on it or report it.
+Matching a symptom to an anti-pattern name is a hypothesis.
 
 ## Establish a claim
 
@@ -20,8 +17,7 @@ Do not use caller-side evidence to establish callee behavior. Read the callee.
 If you cannot establish how the behavior arises, ask a question. Do not report a defect,
 and do not change the code, on a hypothesis.
 
-A passing test establishes that the tested contract holds for the tested inputs.
-It does not establish behavior that the test does not exercise.
+A passing test establishes that the tested contract holds for the tested inputs, and nothing more.
 
 ## Exhaustiveness claims
 
@@ -76,11 +72,7 @@ For machinery of the kinds listed under Change discipline in `../SKILL.md`:
 2. use `git log -S <symbol>` or the relevant history to find the introducing commit;
 3. identify the requirement or failure that the change addressed.
 
-## Refutation
-
-Search for evidence that would make your claim false.
-
-Examples:
+## Refutation examples
 
 - A canonicalization at function entry refutes “flexible input reaches internal code.”
 - An existing second caller can refute “this generic interface has no requirement.”

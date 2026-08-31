@@ -33,7 +33,7 @@ These words mean the same thing in every file.
 - **owner** — the single component responsible for a value, a resource, or a decision: its validity, its changes, and its cleanup.
 - **boundary** — a point where responsibility changes: between owners, between outside the repository and inside it, or between memory and storage. A boundary is *owned* when code here decides what crosses it.
 - **contract** — what a caller may rely on: preconditions, postconditions, the invariants maintained, and the failures the operation can produce.
-- **interface** — the named operations and types through which callers reach a concept. Its contract is what those callers may rely on.
+- **interface** — the named operations and types through which callers reach a concept.
 - **public** — a contract is public when a consumer you do not control depends on it: another repository, a published package, a persisted format, a command line, or a network API. A contract that is not public is internal.
 - **lifetime** — the interval in which a value, a resource, or a derived result stays valid.
 - **representation** — the concrete form a value takes at a point on a path: its type, shape, units, encoding, or layout.
@@ -67,7 +67,7 @@ When a decision needs a requirement that nobody has stated:
 - Otherwise take the smallest option that satisfies the known behavior, and state
   the assumption with the change.
 
-A brainstorming skill, where present, owns the questions that come before a plan exists. This section owns the requirement found missing during implementation.
+A brainstorming skill, where present, owns pre-plan questions; this section owns the requirement found missing during implementation.
 
 ## Core invariants
 
@@ -118,12 +118,6 @@ Broad correctness, security, and ordinary regression review remain the responsib
 
 Load only the references that apply to the change. Invariants 1 to 6 name their own references; the rest are described here.
 
-- `references/evidence.md`
-- `references/interfaces.md`
-- `references/dataflow.md`
-- `references/state-and-lifetime.md`
-- `references/failure-semantics.md`
-- `references/control-flow.md`
 - `references/testing.md` — durable test contracts, regression tests, mocking, TDD, and implementation-pinning tests.
 - `references/concurrency.md` — task, thread, and process ownership; cancellation; synchronization; resource lifetime.
 - `references/optimization.md` — performance work ordered by elimination of work, lifetime, data movement, algorithmic cost, locality, and only then added machinery.
