@@ -14,9 +14,11 @@ Before you add a task, thread, process, worker pool, queue, lock, or similar mac
 
 Do not create fire-and-forget work whose lifetime can exceed the owner that created it.
 
-Do not hide blocking I/O or synchronization behind an asynchronous interface.
+Do not perform blocking I/O or take a blocking lock on the thread that runs an `async` function or an event loop. Move it to an executor, or make the interface synchronous.
 
 Where more than one lock exists, acquire them in one fixed order everywhere. Two paths that take the same locks in different orders can deadlock.
+
+Do not hold a lock across I/O, a wait on another task, or a call into code you do not own. Compute under the lock; perform the work outside it.
 
 For each task that can be cancelled, identify the state a cancellation leaves behind, and who restores it.
 

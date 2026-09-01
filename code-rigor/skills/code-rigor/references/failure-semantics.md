@@ -11,7 +11,8 @@ Do not:
   caller can tolerate repeated effects;
 - coerce internal values “just in case” when the repository controls their representation;
 - distribute compatibility fallbacks across internal code;
-- add a suppression or weaken a check only to make the implementation pass.
+- add a suppression or weaken a check only to make the implementation pass;
+- catch a failure type broader than the failure the handler addresses; a broader catch reclassifies failures the handler does not understand.
 
 Defaults, coercion, degradation, retry, and fallback can be correct product or runtime behavior.
 
@@ -25,9 +26,6 @@ Do not make downstream code infer whether an ambiguous value means success, abse
 
 ## Runtime failure
 
-The rules above concern a failure the code can observe. A dependency can also
-fail by not answering, or by answering for only part of the work.
-
 For each call that leaves the process, or that waits on another task, identify:
 
 - the time limit after which the caller stops waiting;
@@ -40,8 +38,12 @@ another task can extend. A wait with no limit converts a slow dependency into a
 stopped system. State where each limit comes from: a requirement, a
 measurement, or an assumption named as one.
 
-Identify which operations continue when a dependency is unavailable, and which
-cannot. Do not let one unavailable dependency stop work that does not need it.
+Give every retry a count or time bound and a delay between attempts. State where
+each comes from, as for a time limit.
+
+Where a requirement defines which operations continue when a dependency is
+unavailable, do not let that dependency stop them. Where no requirement does, the
+operation fails.
 
 Do not report a partial failure as a total failure when the completed work
 persists. State what completed.

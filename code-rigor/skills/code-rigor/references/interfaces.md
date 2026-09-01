@@ -19,9 +19,9 @@ Add genericity only when at least one of these requires it:
 
 Do not add genericity for a hypothetical future caller.
 
-Coupling is what a caller must know to use an interface correctly. Each
-precondition, ordering rule, and shared representation adds coupling. Reduce
-what the caller must know before you add machinery to manage what it knows.
+Reduce what a caller must know to use an interface — each precondition, ordering
+rule, and shared representation is coupling — before you add machinery to manage
+what it knows.
 
 ## Reject unsupported interface complexity
 
@@ -52,11 +52,12 @@ That conclusion is a hypothesis. Establish why the abstraction exists, as
 A public contract cannot change in one step without breaking a consumer you do
 not control.
 
-1. Expand. Add the new form beside the old one. Both work.
+1. Expand. Add the new form beside the old one. Both work. Mark the old form deprecated in a way its consumers observe.
 2. Migrate. Move every caller you own to the new form.
 3. Contract. Remove the old form once no caller that a stated requirement covers depends on it.
 
-Each step is separately reversible, and step 3 needs the enumeration that
-`evidence.md` requires for a removal.
+Step 3 changes a public contract. It needs the stated requirement that the
+Requirements section of `../SKILL.md` demands, and the enumeration `evidence.md`
+requires for a removal.
 
 Do not keep the expanded state after migration completes.

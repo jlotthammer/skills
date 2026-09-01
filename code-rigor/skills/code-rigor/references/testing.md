@@ -20,7 +20,7 @@ Do not keep a test whose main purpose is to freeze:
 - historical cleanup decisions;
 - the current absence of internal code.
 
-An absence test is valid when absence itself is a durable product, security, or compatibility contract.
+An absence test is valid when the absent behavior is observable at a durable boundary and a product, security, or compatibility contract forbids it. Assert the behavior at that boundary, not the absence of the code.
 
 ## Regression tests
 
@@ -48,7 +48,7 @@ If the contract changed, update the test to state the new durable behavior.
 
 ## Mocking
 
-Mock an external boundary, or one measured too costly for the suite, when isolation requires it.
+Mock at a boundary between the repository and the outside — a network, a clock, a filesystem, another process — or at one measured too costly for the suite, when isolation requires it.
 
 Do not mock internals only to make the current decomposition easy to assert.
 
@@ -56,7 +56,7 @@ Use real collaborators, fakes, or integration tests when interaction between com
 
 ## Determinism and isolation
 
-A test that can fail without a code change protects nothing, and it costs trust in the whole suite.
+A test that can fail without a code change protects nothing.
 
 Control time, randomness, ordering, and the filesystem or network wherever the test touches them.
 

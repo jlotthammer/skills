@@ -1,10 +1,8 @@
 # Control Flow
 
-An invariant established elsewhere removes local branching and adds to what a
-reader must already know. Prefer the non-local invariant when a named owner
-establishes it and the reader can reach that owner. Prefer a local condition
-when the reader would otherwise reconstruct the invariant from call sites.
-See `dataflow.md`.
+Prefer a non-local invariant when a named owner establishes it and the reader can
+reach that owner; otherwise keep the condition local. `dataflow.md` owns the rule
+for deriving a value early.
 
 ## Branching and nesting
 

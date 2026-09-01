@@ -53,10 +53,11 @@ names, or state the claim as unverified.
 
 Identify what the claim licenses, and match the evidence to it.
 
-- Where the claim licenses a removal, or a change to a public contract,
-  enumerate with a scope-aware tool such as LSP `findReferences` or `ast-grep`.
-  Where no such tool is available, do not remove and do not change the
-  contract. State the claim as unverified and ask.
+- Where the claim licenses removal of a symbol reachable from outside its
+  defining scope, or a change to a public contract, enumerate every reference
+  with a scope-aware tool such as LSP `findReferences` or `ast-grep`. Where no
+  such tool is available, do not remove and do not change the contract. State
+  the claim as unverified and ask.
 - Otherwise enumerate by text search across the repository, and state what that
   method cannot see.
 

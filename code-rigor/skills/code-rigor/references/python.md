@@ -6,7 +6,7 @@ Do not compensate for an unclear internal contract with defensive flexibility.
 
 Use typing to make an owned contract explicit.
 
-Do not use broad `Any`, shapeless dictionaries, runtime `getattr` or `hasattr` cascades, or optional parameters when the repository controls a more specific shape.
+Do not use broad `Any`, shapeless dictionaries, runtime `getattr` or `hasattr` cascades, or `None`-typed parameters whose `None` branch no caller uses, when the repository controls a more specific shape.
 
 Use broad types only when the contract is broad.
 
@@ -18,7 +18,7 @@ Do not silence a type error with `Any`, a cast, or a suppression when the real d
 
 Treat generators and iterators as stateful one-shot values. `state-and-lifetime.md` owns the consumption rule.
 
-In repeated data-heavy paths, keep data in structured or bulk form when object identity and per-object behavior are not required. `dataflow.md` owns the bulk-computation rule.
+In repeated data-heavy paths, keep data in structured or bulk form when object identity and per-object behavior are not required. `dataflow.md` owns the bulk-operations rule.
 
 ## Imports and initialization
 

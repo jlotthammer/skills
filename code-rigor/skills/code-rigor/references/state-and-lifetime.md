@@ -13,7 +13,9 @@ Apply this to shared mutable state, globals and singletons, hidden caches, closu
 
 Add a copy only when it satisfies a known aliasing, mutation, isolation, or lifetime requirement.
 
-Before you remove an existing copy, establish why it exists, and establish that no required behavior depends on the copy's isolation, with the enumeration `evidence.md` requires for a removal.
+A caller keeps ownership of a value it passes. Do not mutate it unless the contract names the mutation. Do not return a reference to state you own unless the contract names which side may mutate it.
+
+Before you remove an existing copy, establish why it exists, and enumerate every reader of the shared value to establish that none depends on the copy's isolation.
 
 ## Derived state and caches
 
@@ -39,4 +41,4 @@ Do not hide resource creation inside a helper when doing so obscures cleanup own
 
 Apply this rule to sessions, files, processes, transactions, streams, temporary resources, tasks, and similar handles.
 
-Treat one-shot iterators and generators as mutable state. Consuming one for logging, validation, or inspection changes later behavior, unless the operation owns that consumption or explicitly reconstructs it.
+Treat one-shot iterators and generators as mutable state. Do not consume one for logging, validation, or inspection unless the operation owns that consumption or reconstructs the iterator.

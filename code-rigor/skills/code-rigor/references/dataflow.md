@@ -16,15 +16,10 @@ For each transition, identify:
 
 For derived information, identify all dependencies and the largest scope in which those dependencies remain invariant.
 
-Compute the derived value at the earliest owned scope where all dependencies are known and remain valid.
+For structural derived data — an index, a mask, a mapping, parsed metadata, a layout, canonicalized configuration — compute the value at the earliest owned scope where all dependencies are known and remain valid. Leave a value that costs less to recompute than to carry at its point of use.
 
-This moves knowledge away from the point of use, and it trades against locally
-comprehensible control flow. The trade is acceptable when a named owner
-establishes the value and the reader can reach that owner. It is not acceptable
-when the reader must reconstruct the invariant from the call sites. See
-`control-flow.md`.
-
-Do not repeatedly rebuild indexes, masks, mappings, parsed metadata, layout, canonicalized configuration, or similar structural data when a longer-lived owner can establish them once.
+Derive early only when a named owner establishes the value and the reader can
+reach that owner. Otherwise keep the condition local. See `control-flow.md`.
 
 Do not cache mutable derived state unless you can identify its source of truth and invalidation rule. See `state-and-lifetime.md` when invalidation matters.
 
@@ -38,7 +33,7 @@ At the owning boundary:
 2. validate;
 3. canonicalize.
 
-After that boundary, internal code should rely on the established representation.
+After that boundary, internal code relies on the established representation.
 
 Do not repeatedly defend against representations that the system itself controls.
 
@@ -66,13 +61,17 @@ rename where the data must survive a crash.
 Do not treat a multi-step write as atomic because the steps are adjacent in the
 source.
 
-## Bulk computation
+When you define a persisted form, define how a reader tells it apart from later forms. A reader rejects a form it does not support; it does not misread it.
+
+## Bulk operations
 
 For numerical or data-heavy paths, keep data in bulk form when that form directly expresses the computation.
 
 Do not decompose bulk data into many per-element objects or scalar operations without an algorithmic or semantic requirement.
 
 Do not create a very large intermediate only to remove an explicit loop. Compare total work, memory, and locality.
+
+Do not perform per-element I/O, queries, or synchronization inside a loop when the boundary offers a bulk operation. One round trip per element is a data-path decision, not an optimization to defer.
 
 ## Audit
 

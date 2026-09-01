@@ -34,7 +34,7 @@ These words mean the same thing in every file.
 - **boundary** — a point where responsibility changes: between owners, between outside the repository and inside it, or between memory and storage. A boundary is *owned* when code here decides what crosses it.
 - **contract** — what a caller may rely on: preconditions, postconditions, the invariants maintained, and the failures the operation can produce.
 - **interface** — the named operations and types through which callers reach a concept.
-- **public** — a contract is public when a consumer you do not control depends on it: another repository, a published package, a persisted format, a command line, or a network API. A contract that is not public is internal.
+- **public** — a contract is public when a consumer you do not control depends on it. Treat another repository, a published package, a persisted format, a command line, or a network API as public unless you enumerate every consumer as `references/evidence.md` requires. A contract that is not public is internal.
 - **lifetime** — the interval in which a value, a resource, or a derived result stays valid.
 - **representation** — the concrete form a value takes at a point on a path: its type, shape, units, encoding, or layout.
 - **canonical** — the single form or route that the repository agrees on. Every alternative is converted to it or justified by a requirement.
@@ -49,21 +49,21 @@ These words mean the same thing in every file.
 - **path** — an *execution path* is a route through code; an *architectural path* is the way a concept is reached; a *data path* is the route a value takes from source to output. Qualify the word where the sense is not clear from context.
 - **state** — mutable data with an owner and a lifetime. Where the word means a reachable condition of a state machine, the text says so.
 - **proof obligation** — a condition that must stay true for the code to remain correct, and that someone must re-establish after every later change.
-- **substantive** — a path or a diff is substantive when it changes behavior, a contract, ownership, a representation, a lifetime, or a failure mode. A rename, a comment, or a formatting change is not.
+- **substantive** — a path or a diff is substantive when it changes behavior, a contract, ownership, a representation, a lifetime, or a failure mode. A rename of an internal symbol, a comment, or a formatting change is not.
 
 **invariant** carries two senses. The numbered items under Core invariants are this skill's rules. Everywhere else an invariant is a condition that holds throughout a scope.
 
 ## Requirements
 
-Most rules here permit an action "when a requirement needs it". A requirement is **stated**. It comes from the user, a specification, an existing public contract, an existing caller or implementation in the repository, a supported environment (one the repository declares), or a measurement.
+Most rules here permit an action "when a requirement needs it". A requirement is **stated**. It comes from the user, a specification, an existing public contract, an existing caller of, or the implementation behind, the surface the change touches, a supported environment (one the repository declares), or a measurement.
 
 Do not infer a requirement. An unstated need is a proposal until someone states it.
 
 When a decision needs a requirement that nobody has stated:
 
-- If reverting the diff cannot undo the decision — it changes a public contract,
-  migrates persisted data, or has effects outside the repository — stop and ask
-  one specific question. State the options and your recommendation.
+- Stop and ask one specific question when the decision changes a public contract,
+  migrates persisted data, or has effects outside the repository. State the
+  options and your recommendation.
 - Otherwise take the smallest option that satisfies the known behavior, and state
   the assumption with the change.
 
@@ -100,7 +100,7 @@ Use this order unless repository evidence requires a different one:
 
 Do not create a second path to avoid repairing the first.
 
-Before you remove existing copies, locks, retries, synchronization, compatibility handling, numerical stabilization, or caches, establish why the machinery exists. Existing machinery can encode a real constraint even when its purpose is not obvious from the current call site.
+Before you remove existing copies, locks, retries, synchronization, compatibility handling, numerical stabilization, or caches, establish why the machinery exists. Where history does not name the requirement, establish from the current code that no requirement applies, with the enumeration `references/evidence.md` requires for a removal, and state that history was silent.
 
 ## Testing
 

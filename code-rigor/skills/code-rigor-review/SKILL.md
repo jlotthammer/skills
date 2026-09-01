@@ -71,7 +71,7 @@ End with:
 
 Broad correctness, security, and ordinary regression review belong to the host's normal code-review process.
 
-Pure deletion or YAGNI review can be handled by Ponytail when installed.
+A deletion-focused review skill, where present, owns pure deletion and YAGNI review.
 
 Do not duplicate those reviews unless the issue directly violates a Code Rigor obligation.
 
