@@ -7,6 +7,7 @@ A marketplace of skills for coding agents. Each plugin is a self-contained set o
 ```
 /plugin marketplace add jlotthammer/skills
 /plugin install code-rigor@skills-marketplace
+/plugin install prof-tools@skills-marketplace
 ```
 
 (Testing locally before pushing: `/plugin marketplace add ./` from this directory, then the same `/plugin install` command.)
@@ -16,6 +17,7 @@ A marketplace of skills for coding agents. Each plugin is a self-contained set o
 ```
 codex plugin marketplace add jlotthammer/skills
 codex plugin add code-rigor@skills-marketplace
+codex plugin add prof-tools@skills-marketplace
 ```
 
 Codex reads its own catalog at `.agents/plugins/marketplace.json` — a different path and schema from Claude Code's `.claude-plugin/marketplace.json`, so both files are maintained here.
@@ -27,6 +29,7 @@ For generic `AGENTS.md`-reading agents with no package manager of their own, poi
 ## Plugins
 
 - [`code-rigor`](code-rigor/README.md) — software engineering discipline for maintainable architecture, dataflow, ownership, testing, and optimization. Ships two skills: `code-rigor` (implementation/refactoring/debugging) and `code-rigor-review` (independent diff review). Works with both Claude Code and Codex (dual manifests).
+- [`prof-tools`](https://github.com/jlotthammer/prof-tools) — evidence-driven CPU/CUDA/ROCm optimization skill and Python CLI toolkit, installed from its separate repository.
 - [`labcoat`](https://github.com/jlotthammer/labcoat) — local-first experimental provenance workspace (desktop app + CLI) that also ships an agent skill for hypothesis-driven experiment tracking, with integration notes for both `AGENTS.md`- and `CLAUDE.md`-reading agents. Lives in its own repo; listed in both catalogs here via a remote source, so it installs by name from this marketplace like any other plugin.
 
 ## Adding a plugin to this marketplace

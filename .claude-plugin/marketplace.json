@@ -21,6 +21,15 @@
       },
       "description": "Local-first experimental provenance workspace: turns structured experiment notes into a live reasoning graph of hypotheses, evidence, code changes, and lineage.",
       "version": "0.9.1"
+    },
+    {
+      "name": "prof-tools",
+      "source": {
+        "source": "github",
+        "repo": "jlotthammer/prof-tools"
+      },
+      "description": "Evidence-driven CPU, CUDA and ROCm optimization with correctness verification and Labcoat experiment tracking.",
+      "version": "1.2.1"
     }
   ]
 }
