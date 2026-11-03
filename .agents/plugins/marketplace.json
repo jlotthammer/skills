@@ -38,7 +38,8 @@
         "installation": "AVAILABLE",
         "authentication": "ON_INSTALL"
       },
-      "category": "Developer Tools"
+      "category": "Developer Tools",
+      "description": "Read-only performance analysis plus evidence-driven CPU, CUDA and ROCm optimization with correctness verification and Labcoat experiment tracking."
     }
   ]
 }
